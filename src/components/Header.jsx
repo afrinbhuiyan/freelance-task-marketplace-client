@@ -52,8 +52,8 @@ const Header = () => {
     >
       <div className="flex justify-between items-center">
         <NavLink to="/" className="text-2xl font-bold flex items-center gap-3">
-          <img className="w-10" src={Logo} alt="Freelanzia Logo" />
-          <span className="text-white font-serif">Freelanzia</span>
+          <img className="w-10" src={Logo} alt="TaskHub Logo" />
+          <span className="text-white font-serif">TaskHub</span>
         </NavLink>
 
         <nav className="hidden md:flex space-x-8">
