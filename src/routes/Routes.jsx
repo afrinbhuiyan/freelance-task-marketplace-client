@@ -38,7 +38,8 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/task/:id",
+        path: "/browse-tasks/:id",
+        loader: () => fetch("http://localhost:3000/tasks"),
         element: (
           <PrivateRoute>
             <TaskDetails />
@@ -53,7 +54,11 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      { path: "/browse-tasks", Component: BrowseTasks },
+      {
+        path: "/browse-tasks",
+        Component: BrowseTasks,
+        loader: () => fetch("http://localhost:3000/tasks"),
+      },
     ],
   },
 ]);

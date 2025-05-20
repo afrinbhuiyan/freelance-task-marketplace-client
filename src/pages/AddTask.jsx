@@ -77,13 +77,15 @@ const AddTask = () => {
             required
           />
           <input
-            type="text"
+            type="email"
+            name="email"
             className="input input-bordered w-full"
             value={user?.email}
             readOnly
           />
           <input
             type="text"
+            name="name"
             className="input input-bordered w-full"
             value={user?.displayName}
             readOnly
