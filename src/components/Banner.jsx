@@ -77,25 +77,25 @@ const Banner = () => {
           dynamicBullets: true,
         }}
         navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
         }}
         modules={[Autoplay, EffectCreative, Pagination, Navigation]}
         className="mySwiper"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div 
-              className="relative h-[500px] md:h-[800px] overflow-hidden"
+            <div
+              className="relative h-[600px] md:h-[800px] overflow-hidden"
               style={{
                 backgroundImage: `url(${slide.bgImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
             >
               <div className="absolute inset-0 bg-[#11111193]"></div>
               <div className="absolute inset-0 bg-noise opacity-10"></div>
-              
+
               <div className="container mx-auto px-4 h-full flex items-center relative z-10">
                 <div className="md:w-1/2">
                   <Fade direction="left" duration={800} cascade>
@@ -129,8 +129,19 @@ const Banner = () => {
                             className="w-full py-4 px-6 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all duration-300 pr-12"
                           />
                           <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white text-gray-900 p-2 rounded-full hover:bg-gray-100 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                              />
                             </svg>
                           </button>
                         </div>
@@ -138,7 +149,9 @@ const Banner = () => {
 
                       <div className="flex gap-4 flex-wrap pt-2">
                         <Fade delay={500} duration={800}>
-                          <button className={`${slide.buttonColor} px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1`}>
+                          <button
+                            className={`${slide.buttonColor} px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1`}
+                          >
                             {slide.buttonText}
                           </button>
                         </Fade>
@@ -155,9 +168,14 @@ const Banner = () => {
             </div>
           </SwiperSlide>
         ))}
-        
-        <div className="swiper-button-next !text-white !right-8 after:!text-2xl hover:!scale-125 transition-transform"></div>
-        <div className="swiper-button-prev !text-white !left-8 after:!text-2xl hover:!scale-125 transition-transform"></div>
+
+        {/* Navigation Buttons */}
+        <div className="absolute z-30 bottom-8 right-8 md:bottom-auto md:right-8 md:top-1/2 md:-translate-y-1/2">
+          <div className="swiper-button-next !text-white !bg-white/10 !backdrop-blur-sm !w-12 !h-12 !rounded-full !border !border-white/20 after:!text-xl hover:!scale-110 transition-transform"></div>
+        </div>
+        <div className="absolute z-30 bottom-8 left-8 md:bottom-auto md:left-8 md:top-1/2 md:-translate-y-1/2">
+          <div className="swiper-button-prev !text-white !bg-white/10 !backdrop-blur-sm !w-12 !h-12 !rounded-full !border !border-white/20 after:!text-xl hover:!scale-110 transition-transform"></div>
+        </div>
       </Swiper>
     </div>
   );

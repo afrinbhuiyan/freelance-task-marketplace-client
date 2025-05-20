@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import Logo from "../../public/logo.png";
 import { FaSearch } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
@@ -7,24 +7,25 @@ import SearchModal from "./SearchModal";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+   const location = useLocation();
 
   const navLinks = [
-    { name: "Home", path: "/", protected: false },
-    { name: "Add Task", path: "/add-task", protected: true },
-    { name: "Browse Tasks", path: "/browse-tasks", protected: false },
-    { name: "My Posted Tasks", path: "/my-tasks", protected: true },
+    { name: "Home", path: "/" },
+    { name: "Add Task", path: "/add-task" },
+    { name: "Browse Tasks", path: "/browse-tasks" },
+    { name: "My Posted Tasks", path: "/my-tasks" },
   ];
 
+  const isHomePage = location.pathname === "/";
+
   return (
-    <div className="px-4 py-6 border-b border-[#ffffff2c]">
+    <div className={`px-4 py-6 ${isHomePage ? "border-b border-[#ffffff2c]" : "bg-black"}`}>
       <div className="flex justify-between items-center">
-        {/* Logo */}
         <NavLink to="/" className="text-2xl font-bold flex items-center gap-3">
           <img className="w-10" src={Logo} alt="Freelanzia Logo" />
           <span className="text-white font-serif">Freelanzia</span>
         </NavLink>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">
           {navLinks.map((link) => (
             <NavLink
@@ -32,7 +33,7 @@ const Header = () => {
               to={link.path}
               className={({ isActive }) =>
                 `px-1 py-2 font-medium transition-colors relative text-white
-                hover:text-gray-200 ${isActive ? "font-semibold" : ""}`
+                hover:text-gray-200 ${isActive ? "font-semibold border-b" : ""}`
               }
             >
               {link.name}
