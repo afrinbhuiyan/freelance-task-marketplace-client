@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import Logo from "../../public/logo.png";
 import { FaSearch } from "react-icons/fa";
@@ -8,9 +8,11 @@ import { AuthContext } from "../provider/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const location = useLocation();
 
-  const { user } = use(AuthContext);
+  const { user, logout } = use(AuthContext);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -20,6 +22,27 @@ const Header = () => {
   ];
 
   const isHomePage = location.pathname === "/";
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleSignOut = () => {
+    logout().than(() => {
+      console.log("logOUT")
+    }).catch((error) => {
+      console.log(error.massage);
+    });
+  };
 
   return (
     <div
@@ -51,18 +74,87 @@ const Header = () => {
         <div className="hidden md:flex space-x-4 items-center">
           <SearchModal></SearchModal>
           {user ? (
-            <img className="w-12 rounded-full" src={user.photoURL} alt="" />
+            <div className="relative" ref={dropdownRef}>
+              {/* User Avatar Button */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center gap-2 focus:outline-none"
+              >
+                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 hover:border-indigo-400 transition-all duration-200">
+                  <img
+                    className="w-full h-full object-cover"
+                    src={user.photoURL || "https://i.imgur.com/7k12EPD.png"}
+                    alt="User profile"
+                  />
+                </div>
+              </button>
+
+              {/* Dropdown Menu */}
+              <div
+                className={`absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 ease-out origin-top-right z-50 ${
+                  isOpen
+                    ? "opacity-100 scale-100 translate-y-0"
+                    : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+                }`}
+              >
+                {/* User Info Section */}
+                <div className="p-4 bg-gradient-to-r from-indigo-500 to-purple-600">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={user.photoURL || "https://i.imgur.com/7k12EPD.png"}
+                        alt="User profile"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-white text-sm">
+                        {user.displayName || "User"}
+                      </h3>
+                      <p className="text-white/80 text-xs">{user.email}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Menu Items */}
+                <div className="divide-y divide-gray-100">
+                  <NavLink
+                    to="/profile"
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Profile Settings
+                  </NavLink>
+                  <NavLink
+                    to="/my-tasks"
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    My Tasks
+                  </NavLink>
+                  <button
+                    onClick={() => {
+                      handleSignOut();
+                      setIsOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              </div>
+            </div>
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <NavLink
                 to="/login"
-                className="px-4 py-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+                className="px-3 py-1.5 text-sm rounded-md text-white hover:bg-white/10 transition-colors"
               >
                 Login
               </NavLink>
               <NavLink
                 to="/signup"
-                className="px-4 py-2 rounded-lg bg-white text-gray-900 hover:bg-gray-100 transition-colors"
+                className="px-3 py-1.5 text-sm rounded-md bg-white text-indigo-600 hover:bg-gray-100 transition-colors"
               >
                 Sign Up
               </NavLink>

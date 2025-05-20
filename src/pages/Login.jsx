@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { signInUser, googleLogin } = use(AuthContext);
@@ -35,7 +35,9 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        setErrors(error.massage);
+        console.error(error);
+        setLoading(false);
+        setErrors({ general: error.message });
       });
   };
 
@@ -81,7 +83,6 @@ const Login = () => {
                 id="email"
                 name="email"
                 type="email"
-                autoComplete="email"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
@@ -113,8 +114,10 @@ const Login = () => {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
-              {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+              {errors.general && (
+                <p className="text-sm text-red-600 text-center">
+                  {errors.general}
+                </p>
               )}
             </div>
           </div>
