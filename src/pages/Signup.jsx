@@ -6,11 +6,11 @@ import Swal from "sweetalert2";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState("");
+  const [errors, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const { createUser, googleLogin } = use(AuthContext);
+  const { createUser, googleLogin, updateUserProfile } = use(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,31 +20,38 @@ const Signup = () => {
     const data = Object.fromEntries(formData.entries());
     console.log(data);
 
-    const { email, password } = data;
-    console.log(email, password);
+    const { email, password, name, photoURL } = data;
+    console.log(email, password, name, photoURL);
 
     if (password.length < 6) {
-      setErrors("Password must be at least 6 characters");
+      setError("Password must be at least 6 characters");
     }
     if (!/[A-Z]/.test(password)) {
-      setErrors("Password must contain at least one uppercase letter");
+      setError("Password must contain at least one uppercase letter");
     }
     if (!/[a-z]/.test(password)) {
-      setErrors("Password must contain at least one lowercase letter");
+      setError("Password must contain at least one lowercase letter");
     }
 
     createUser(email, password)
       .then((result) => {
         console.log(result);
-        Swal.fire({
-          title: "Drag me!",
-          icon: "success",
-          draggable: true,
-        });
-        navigate("/");
+        updateUserProfile({ displayName: name, photoURL: photoURL })
+          .then(() => {
+            Swal.fire({
+              title: "Drag me!",
+              icon: "success",
+              draggable: true,
+            });
+            navigate("/");
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            setError(errorMessage);
+          });
       })
       .catch((error) => {
-        setErrors(error.message);
+        setError(error.message);
       });
   };
 
@@ -117,7 +124,7 @@ const Signup = () => {
                 htmlFor="photoURL"
                 className="block text-sm font-medium text-gray-700"
               >
-                Profile Photo URL 
+                Profile Photo URL
               </label>
               <input
                 id="photoURL"

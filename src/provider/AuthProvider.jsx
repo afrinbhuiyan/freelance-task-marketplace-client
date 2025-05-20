@@ -14,11 +14,11 @@ import { auth } from "../firebase/firebase.config";
 import { AuthContext } from "./AuthContext";
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  console.log(currentUser)
-  
+  console.log(user);
+
   const googleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
@@ -49,24 +49,23 @@ const AuthProvider = ({ children }) => {
     throw new Error("No authenticated user to delete");
   };
 
-  const updateUserProfile = (profileData) => {
-    if (auth.currentUser) {
-      return updateProfile(auth.currentUser, profileData);
-    }
-    throw new Error("No authenticated user to update");
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile).then(() => {
+      setUser({ ...auth.currentUser });
+      return true;
+    });
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setLoading(false);
     });
-
-    return unsubscribe;
+    return () => unsubscribe();
   }, []);
 
   const authInfo = {
-    currentUser,
+    user,
     createUser,
     signInUser,
     googleLogin,

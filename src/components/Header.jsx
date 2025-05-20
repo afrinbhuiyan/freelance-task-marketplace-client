@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import Logo from "../../public/logo.png";
 import { FaSearch } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import SearchModal from "./SearchModal";
+import { AuthContext } from "../provider/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-   const location = useLocation();
+  const location = useLocation();
+
+  const { user } = use(AuthContext);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -19,7 +22,11 @@ const Header = () => {
   const isHomePage = location.pathname === "/";
 
   return (
-    <div className={`px-4 py-6 ${isHomePage ? "border-b border-[#ffffff2c]" : "bg-black"}`}>
+    <div
+      className={`px-4 py-6 ${
+        isHomePage ? "border-b border-[#ffffff2c]" : "bg-black"
+      }`}
+    >
       <div className="flex justify-between items-center">
         <NavLink to="/" className="text-2xl font-bold flex items-center gap-3">
           <img className="w-10" src={Logo} alt="Freelanzia Logo" />
@@ -43,18 +50,24 @@ const Header = () => {
 
         <div className="hidden md:flex space-x-4 items-center">
           <SearchModal></SearchModal>
-          <NavLink
-            to="/login"
-            className="px-4 py-2 rounded-lg text-white hover:bg-white/10 transition-colors"
-          >
-            Login
-          </NavLink>
-          <NavLink
-            to="/signup"
-            className="px-4 py-2 rounded-lg bg-white text-gray-900 hover:bg-gray-100 transition-colors"
-          >
-            Sign Up
-          </NavLink>
+          {user ? (
+            <img className="w-12 rounded-full" src={user.photoURL} alt="" />
+          ) : (
+            <div className="flex items-center gap-4">
+              <NavLink
+                to="/login"
+                className="px-4 py-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/signup"
+                className="px-4 py-2 rounded-lg bg-white text-gray-900 hover:bg-gray-100 transition-colors"
+              >
+                Sign Up
+              </NavLink>
+            </div>
+          )}
         </div>
         <button
           className="md:hidden text-white focus:outline-none"
