@@ -1,14 +1,14 @@
 import React from "react";
 import Banner from "../components/Banner";
-import { useLoaderData } from "react-router";
+import FeaturedTasks from "../components/FeaturedTasks";
 
 const Home = () => {
-  const data = useLoaderData();
   return (
     <div>
       <main className="flex-grow">
-        <Banner slides={data} />
+        <Banner />
       </main>
+        <FeaturedTasks></FeaturedTasks>
     </div>
   );
 };
