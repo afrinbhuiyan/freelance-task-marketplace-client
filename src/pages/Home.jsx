@@ -1,8 +1,8 @@
 import React from "react";
 import Banner from "../components/Banner";
 import FeaturedTasks from "../components/FeaturedTasks";
-import HowItWorks from "../components/HowItWorks";
 import BrowseCategory from "../components/BrowseCategory";
+import ReviewSystem from "../components/ReviewSystem";
 
 const Home = () => {
   return (
@@ -12,7 +12,7 @@ const Home = () => {
       </main>
       <BrowseCategory></BrowseCategory>
       <FeaturedTasks></FeaturedTasks>
-      <HowItWorks></HowItWorks>
+      <ReviewSystem></ReviewSystem>
     </div>
   );
 };
