@@ -5,18 +5,15 @@ import {
   FaFilter,
   FaClock,
   FaDollarSign,
-  FaTag,
-  FaStar,
   FaMapMarkerAlt,
   FaEdit,
   FaTrash,
 } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
-import Swal from "sweetalert2";
 
 const BrowseTasks = () => {
   const loadedTasks = useLoaderData();
-  const [tasks, setTasks] = useState(loadedTasks);
+  const [tasks] = useState(loadedTasks);
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
@@ -26,83 +23,6 @@ const BrowseTasks = () => {
     sortBy: "newest",
     location: "",
   });
-
-  const handleDeleteTask = (task) => {
-    Swal.fire({
-      title: "Delete this task?",
-      html: `
-      <div class="text-left">
-        <p class="mb-2">You're about to delete:</p>
-        <p class="font-bold text-[#331A15]">${task.title}</p>
-        <div class="flex items-center mt-4">
-          <div class="w-16 h-16 bg-amber-100 flex items-center justify-center rounded-md mr-4 text-amber-600 font-bold text-xl">
-            ${task.title.charAt(0)}
-          </div>
-          <div>
-            <p class="flex items-center"><FaDollarSign class="mr-1"/> Price: $${
-              task.budget
-            }</p>
-            <p class="flex items-center"><FaClock class="mr-1"/> Deadline: ${
-              task.deadline
-            }</p>
-            <p class="flex items-center"><FaMapMarkerAlt class="mr-1"/> ${
-              task.location || "Remote"
-            }</p>
-          </div>
-        </div>
-      </div>
-    `,
-      imageWidth: 80,
-      imageHeight: 80,
-      imageAlt: "Task icon",
-      showCancelButton: true,
-      confirmButtonColor: "#EA4744",
-      cancelButtonColor: "#D2B48C",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, keep it",
-      background: "#F5F4F1",
-      customClass: {
-        popup: "rounded-lg border-2 border-[#D2B48C]",
-        title: "text-2xl font-rancho text-[#331A15]",
-        htmlContainer: "text-[#5C3A21]",
-        confirmButton: "px-6 py-2 rounded-md font-medium",
-        cancelButton: "px-6 py-2 rounded-md font-medium",
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:3000/tasks/${task._id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount) {
-              Swal.fire({
-                title: "Deleted!",
-                text: `${task.title} has been removed.`,
-                icon: "success",
-                confirmButtonColor: "#D2B48C",
-                background: "#F5F4F1",
-                timer: 2000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-              });
-              const remainingTasks = tasks.filter((t) => t._id !== task._id);
-              setTasks(remainingTasks);
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-            Swal.fire({
-              title: "Error!",
-              text: "Failed to delete the task.",
-              icon: "error",
-              confirmButtonColor: "#EA4744",
-              background: "#F5F4F1",
-            });
-          });
-      }
-    });
-  };
 
   const filteredTasks = tasks
     .filter((task) => {
@@ -420,15 +340,13 @@ const BrowseTasks = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex justify-end space-x-2">
-                           <Link
-                            to={`/update-task/${task._id}`}
+                           <button
                             className="text-indigo-600 hover:text-indigo-900 p-1 rounded hover:bg-indigo-50"
                             title="Edit"
                           >
                             <FaEdit />
-                          </Link>
+                          </button>
                           <button
-                            onClick={() => handleDeleteTask(task)}
                             className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
                             title="Delete"
                           >
