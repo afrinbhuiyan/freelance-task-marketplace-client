@@ -1,6 +1,8 @@
 import React from "react";
 import Banner from "../components/Banner";
 import FeaturedTasks from "../components/FeaturedTasks";
+import HowItWorks from "../components/HowItWorks";
+import BrowseCategory from "../components/BrowseCategory";
 
 const Home = () => {
   return (
@@ -8,7 +10,9 @@ const Home = () => {
       <main className="flex-grow">
         <Banner />
       </main>
-        <FeaturedTasks></FeaturedTasks>
+      <BrowseCategory></BrowseCategory>
+      <FeaturedTasks></FeaturedTasks>
+      <HowItWorks></HowItWorks>
     </div>
   );
 };
