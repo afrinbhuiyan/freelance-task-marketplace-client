@@ -5,6 +5,7 @@ import { FaSearch } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import SearchModal from "./SearchModal";
 import { AuthContext } from "../provider/AuthContext";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,11 +38,13 @@ const Header = () => {
   }, []);
 
   const handleSignOut = () => {
-    logout().than(() => {
-      console.log("logOUT")
-    }).catch((error) => {
-      console.log(error.massage);
-    });
+    logout()
+      .than(() => {
+        console.log("logOUT");
+      })
+      .catch((error) => {
+        console.log(error.massage);
+      });
   };
 
   return (
@@ -55,7 +58,6 @@ const Header = () => {
           <img className="w-10" src={Logo} alt="TaskHub Logo" />
           <span className="text-white font-serif">TaskHub</span>
         </NavLink>
-
         <nav className="hidden md:flex space-x-8">
           {navLinks.map((link) => (
             <NavLink
@@ -73,9 +75,11 @@ const Header = () => {
 
         <div className="hidden md:flex space-x-4 items-center">
           <SearchModal></SearchModal>
+          <div className="flex-none">
+            <ThemeToggle />
+          </div>
           {user ? (
             <div className="relative" ref={dropdownRef}>
-              {/* User Avatar Button */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center gap-2 focus:outline-none"
@@ -89,7 +93,6 @@ const Header = () => {
                 </div>
               </button>
 
-              {/* Dropdown Menu */}
               <div
                 className={`absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 ease-out origin-top-right z-50 ${
                   isOpen
@@ -97,7 +100,6 @@ const Header = () => {
                     : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
                 }`}
               >
-                {/* User Info Section */}
                 <div className="p-4 bg-gradient-to-r from-indigo-500 to-purple-600">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
@@ -116,7 +118,6 @@ const Header = () => {
                   </div>
                 </div>
 
-                {/* Menu Items */}
                 <div className="divide-y divide-gray-100">
                   <NavLink
                     to="/profile"

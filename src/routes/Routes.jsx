@@ -9,6 +9,7 @@ import BrowseTasks from "../pages/BrowseTasks";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import ViewBids from "../pages/viewBids";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,15 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <UpdateTask />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/view-bids/:id",
+        loader: ({ params }) => fetch(`http://localhost:3000/tasks/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <ViewBids></ViewBids>
           </PrivateRoute>
         ),
       },

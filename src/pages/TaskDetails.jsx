@@ -48,7 +48,6 @@ const TaskDetails = () => {
       taskId: id,
       userEmail: user.email,
       userName: user.displayName,
-      userPhoto: user.photoURL,
       amount: parseFloat(bidAmount),
       deadline: bidDeadline,
       timestamp: new Date().toISOString(),
@@ -62,6 +61,8 @@ const TaskDetails = () => {
         },
         body: JSON.stringify(bidData),
       });
+
+      console.log(bidData)
 
       const result = await res.json();
 

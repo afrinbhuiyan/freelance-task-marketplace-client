@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
-  themes: light --default;
+  themes: all;
 }
 
 
@@ -46,4 +45,8 @@ input::placeholder {
 
 button {
   font-family: "Inter", sans-serif;
+}
+
+.fd{
+  border: 1px solid white;
 }

@@ -254,7 +254,7 @@ const MyTasks = () => {
                             <FaTrash />
                           </button>
                           <Link
-                            to={`/task-bids/${task._id}`}
+                            to={`/view-bids/${task._id}`}
                             className="text-indigo-600 hover:text-indigo-800 p-2 rounded hover:bg-indigo-100 transition-colors"
                             title="View Bids"
                           >
