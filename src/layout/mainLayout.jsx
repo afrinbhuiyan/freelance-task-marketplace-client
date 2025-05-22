@@ -6,9 +6,10 @@ import Footer from "../components/Footer";
 const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
+      <div className="absolute top-0 left-0 right-0 z-50 bg-transparent">
         <Header />
-      </header>
+      </div>
+      {/* <header className="h-20 border"></header> */}
       <main>
         <Outlet />
       </main>
