@@ -20,6 +20,7 @@ const Header = () => {
     { name: "Add Task", path: "/add-task" },
     { name: "Browse Tasks", path: "/browse-tasks" },
     { name: "My Posted Tasks", path: "/my-tasks" },
+    { name: "how To Works", path: "/how-to-works" },
   ];
 
   const isHomePage = location.pathname === "/";

@@ -23,7 +23,6 @@ const FeaturedTasks = () => {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
-        <span className="ml-3 text-gray-600">Loading featured tasks...</span>
       </div>
     );
   }
@@ -90,9 +89,7 @@ const FeaturedTasks = () => {
     <section className="px-4 pt-12 pb-20 border-gray-50 rounded-xl">
       <div className="max-w-7xl mx-auto">
         <div className="text-start mb-16">
-          <h2 className="text-3xl text-gray-800 mb-3 roboto">
-            Featured Tasks
-          </h2>
+          <h2 className="text-3xl text-gray-800 mb-3 roboto">Featured Tasks</h2>
           <p className="text-gray-600 max-w-2xl roboto">
             Browse through our hand-picked selection of premium tasks
           </p>

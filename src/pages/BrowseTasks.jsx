@@ -195,7 +195,6 @@ const BrowseTasks = () => {
                 </div>
               </div>
 
-              {/* Sort By */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Sort By
@@ -217,7 +216,6 @@ const BrowseTasks = () => {
           )}
         </div>
 
-        {/* Results Count */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold text-gray-800">
             {filteredTasks.length}{" "}
@@ -229,7 +227,6 @@ const BrowseTasks = () => {
           </div>
         </div>
 
-        {/* Tasks Table */}
         {filteredTasks.length > 0 ? (
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
             <div className="overflow-x-auto">
@@ -340,24 +337,12 @@ const BrowseTasks = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex justify-end space-x-2">
-                           <button
-                            className="text-indigo-600 hover:text-indigo-900 p-1 rounded hover:bg-indigo-50"
-                            title="Edit"
-                          >
-                            <FaEdit />
-                          </button>
-                          <button
-                            className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
-                            title="Delete"
-                          >
-                            <FaTrash />
-                          </button>
                           <Link
                             to={`/browse-tasks/${task._id}`}
                             className="text-amber-600 hover:text-amber-900 p-1 rounded hover:bg-amber-50"
                             title="View Details"
                           >
-                            <FaSearch />
+                            Details
                           </Link>
                         </div>
                       </td>

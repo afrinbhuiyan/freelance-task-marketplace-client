@@ -5,8 +5,6 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
-  sendPasswordResetEmail,
-  deleteUser,
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
@@ -17,15 +15,15 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  console.log(user);
-
   const googleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -35,21 +33,12 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
-  const resetPassword = (email) => {
-    return sendPasswordResetEmail(auth, email);
-  };
-
-  const deleteCurrentUser = async () => {
-    if (auth.currentUser) {
-      return deleteUser(auth.currentUser);
-    }
-    throw new Error("No authenticated user to delete");
-  };
-
   const updateUserProfile = (profile) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, profile).then(() => {
       setUser({ ...auth.currentUser });
       return true;
@@ -61,25 +50,25 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
     });
-    return () => unsubscribe();
+
+    return () => {
+      console.log("AuthProvider cleanup: unsubscribing");
+      unsubscribe();
+    };
   }, []);
 
   const authInfo = {
     user,
+    loading,
     createUser,
     signInUser,
     googleLogin,
     logout,
-    resetPassword,
-    deleteCurrentUser,
     updateUserProfile,
-    loading,
   };
 
   return (
-    <AuthContext.Provider value={authInfo}>
-      {!loading && children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
 };
 
