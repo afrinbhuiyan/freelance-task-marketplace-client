@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/browse-tasks/:id",
-        loader: () => fetch("http://localhost:3000/tasks"),
+        loader: () => fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks"),
         element: (
           <PrivateRoute>
             <TaskDetails />
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/update-task/:id",
-        loader: ({ params }) => fetch(`http://localhost:3000/tasks/${params.id}`),
+        loader: ({ params }) => fetch(`https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${params.id}`),
         element: (
           <PrivateRoute>
             <UpdateTask />
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/view-bids/:id",
-        loader: ({ params }) => fetch(`http://localhost:3000/tasks/${params.id}`),
+        loader: ({ params }) => fetch(`https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${params.id}`),
         element: (
           <PrivateRoute>
             <ViewBids></ViewBids>
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
       {
         path: "/browse-tasks",
         Component: BrowseTasks,
-        loader: () => fetch("http://localhost:3000/tasks"),
+        loader: () => fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks"),
       },
     ],
   },

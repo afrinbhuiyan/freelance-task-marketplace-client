@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
     "firebase": "^11.7.3",
+    "framer-motion": "^12.12.2",
     "lottie-react": "^2.4.1",
     "react": "^19.1.0",
     "react-awesome-reveal": "^4.3.1",

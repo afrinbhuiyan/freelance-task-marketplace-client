@@ -31,7 +31,7 @@ const UpdateTask = () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:3000/tasks/${task._id}`, {
+      const res = await fetch(`https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${task._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

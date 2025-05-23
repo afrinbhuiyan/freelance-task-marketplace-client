@@ -1,6 +1,11 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCreative, Pagination, Navigation } from "swiper/modules";
+import {
+  Autoplay,
+  EffectCreative,
+  Pagination,
+  Navigation,
+} from "swiper/modules";
 import { Typewriter } from "react-simple-typewriter";
 import { Fade, Zoom, Bounce } from "react-awesome-reveal";
 import "swiper/css";
@@ -17,12 +22,18 @@ const Banner = () => {
     {
       id: 1,
       title: "Post Your Task",
-      typedWords: ["Web Projects", "Design Jobs", "Marketing Work", "Writing Tasks"],
-      description: "Easily post your tasks and connect with skilled freelancers today.",
+      typedWords: [
+        "Web Projects",
+        "Design Jobs",
+        "Marketing Work",
+        "Writing Tasks",
+      ],
+      description:
+        "Easily post your tasks and connect with skilled freelancers today.",
       buttonText: "Add a Task",
       buttonLink: "/add-task",
       bgImage: banner1,
-      accentColor: "text-green-300",
+      accentColor: "text-yellow-100",
       buttonColor: "bg-white hover:bg-gray-100 text-gray-900",
       inputPlaceholder: "What task do you need done?",
     },
@@ -30,24 +41,31 @@ const Banner = () => {
       id: 2,
       title: "Browse Freelance Jobs",
       typedWords: ["Development", "Design", "Writing", "Marketing"],
-      description: "Find the perfect task for your skillset and start earning instantly.",
+      description:
+        "Find the perfect task for your skillset and start earning instantly.",
       buttonText: "Browse Tasks",
       buttonLink: "/browse",
       bgImage: banner2,
-      accentColor: "text-blue-200",
+      accentColor: "text-yellow-100",
       buttonColor: "bg-white hover:bg-gray-100 text-gray-900",
       inputPlaceholder: "Search for jobs...",
     },
     {
       id: 3,
       title: "Manage Your Work",
-      typedWords: ["Your Posted Tasks", "Bid Responses", "Task Updates", "Collaborations"],
-      description: "Keep track of your tasks, bids, and updates — all in one place.",
+      typedWords: [
+        "Your Posted Tasks",
+        "Bid Responses",
+        "Task Updates",
+        "Collaborations",
+      ],
+      description:
+        "Keep track of your tasks, bids, and updates — all in one place.",
       buttonText: "My Posted Tasks",
       buttonLink: "/my-posted-tasks",
       bgImage: banner3,
       overlayColor: "rgba(59, 130, 246, 0.75)",
-      accentColor: "text-white",
+      accentColor: "text-yellow-100",
       buttonColor: "bg-white hover:bg-gray-100 text-gray-900",
       inputPlaceholder: "Filter your tasks...",
     },

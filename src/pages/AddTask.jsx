@@ -15,7 +15,7 @@ const AddTask = () => {
     newTask.userEmail = user?.email;
     newTask.userName = user?.displayName;
 
-    fetch("http://localhost:3000/tasks", {
+    fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks", {
       method: "POST",
       headers: {
         "content-type": "application/json",
