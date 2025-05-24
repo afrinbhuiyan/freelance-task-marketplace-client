@@ -11,7 +11,7 @@ const ViewBids = () => {
 
   useEffect(() => {
     fetch(
-      `https://freelance-task-marketplace-server-mauve.vercel.app/bids?taskId=${task._id}`
+      `https://freelance-task-marketplace-server-v2ix.vercel.app/bids?taskId=${task._id}`
     )
       .then((res) => res.json())
       .then((data) => {

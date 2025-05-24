@@ -81,7 +81,7 @@ const router = createBrowserRouter([
         path: "/browse-tasks/:id",
         loader: () =>
           fetch(
-            "https://freelance-task-marketplace-server-mauve.vercel.app/tasks"
+            "https://freelance-task-marketplace-server-v2ix.vercel.app/tasks"
           ),
         hydrateFallbackElement: (
           <div className="flex justify-center items-center min-h-screen">
@@ -98,7 +98,7 @@ const router = createBrowserRouter([
         path: "/update-task/:id",
         loader: ({ params }) =>
           fetch(
-            `https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${params.id}`
+            `https://freelance-task-marketplace-server-v2ix.vercel.app/tasks/${params.id}`
           ),
         hydrateFallbackElement: (
           <div className="flex justify-center items-center min-h-screen">
@@ -115,7 +115,7 @@ const router = createBrowserRouter([
         path: "/view-bids/:id",
         loader: ({ params }) =>
           fetch(
-            `https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${params.id}`
+            `https://freelance-task-marketplace-server-v2ix.vercel.app/tasks/${params.id}`
           ),
         hydrateFallbackElement: (
           <div className="flex justify-center items-center min-h-screen">
@@ -133,7 +133,7 @@ const router = createBrowserRouter([
         Component: BrowseTasks,
         loader: async () => {
           const res = await fetch(
-            "https://freelance-task-marketplace-server-mauve.vercel.app/tasks"
+            "https://freelance-task-marketplace-server-v2ix.vercel.app/tasks"
           );
           return res.json();
         },

@@ -15,7 +15,7 @@ const MyTasks = () => {
   useEffect(() => {
     if (userEmail) {
       fetch(
-        `https://freelance-task-marketplace-server-mauve.vercel.app/tasks?email=${userEmail}`
+        `https://freelance-task-marketplace-server-v2ix.vercel.app/tasks?email=${userEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -64,7 +64,7 @@ const MyTasks = () => {
       if (result.isConfirmed) {
         try {
           const response = await fetch(
-            `https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${task._id}`,
+            `https://freelance-task-marketplace-server-v2ix.vercel.app/tasks/${task._id}`,
             {
               method: "DELETE",
             }

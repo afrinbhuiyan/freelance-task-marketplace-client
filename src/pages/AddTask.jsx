@@ -18,7 +18,7 @@ const AddTask = () => {
 
     console.log(newTask);
 
-    fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks", {
+    fetch("https://freelance-task-marketplace-server-v2ix.vercel.app/tasks", {
       method: "POST",
       headers: {
         "content-type": "application/json",
