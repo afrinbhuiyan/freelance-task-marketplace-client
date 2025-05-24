@@ -6,16 +6,19 @@ const FeaturedTasks = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks/featured")
+    fetch(
+      "https://freelance-task-marketplace-server-mauve.vercel.app/tasks/featured"
+    )
       .then((res) => res.json())
       .then((data) => {
         setFeaturedTasks(data);
         setLoading(false);
+        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
         setLoading(false);
-        setError(error.massage);
+        setError(error.message);
       });
   }, []);
 

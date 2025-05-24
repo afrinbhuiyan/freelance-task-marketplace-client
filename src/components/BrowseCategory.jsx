@@ -91,7 +91,7 @@ const BrowseCategory = () => {
   return (
     <div className="py-16 lg:py-28 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Title Section */}
+
         <Reveal keyframes={customAnimation} triggerOnce duration={800}>
           <div className="text-start">
             <h2 className="text-2xl md:text-3xl lg:text-4xl mb-2 md:mb-3 roboto">

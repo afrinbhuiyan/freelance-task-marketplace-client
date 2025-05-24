@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
 import {
   FaCheckCircle,
@@ -9,10 +9,11 @@ import {
   FaArrowLeft,
 } from "react-icons/fa";
 import { AuthContext } from "../provider/AuthContext";
+import Swal from "sweetalert2";
 
 const TaskDetails = () => {
   const { id } = useParams();
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [task, setTask] = useState({});
   const [bidAmount, setBidAmount] = useState("");
@@ -21,25 +22,27 @@ const TaskDetails = () => {
   const [discountApplied, setDiscountApplied] = useState(false);
 
   useEffect(() => {
-    fetch(`https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${id}`)
+    fetch(
+      `https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${id}`
+    )
       .then((res) => res.json())
       .then((data) => setTask(data));
-  }, [id]);
-
-  useEffect(() => {
-    const fetchBids = async () => {
-      try {
-        const res = await fetch(`https://freelance-task-marketplace-server-mauve.vercel.app/bids?taskId=${id}`);
-        const data = await res.json();
-        setBidHistory(data);
-        setDiscountApplied(data.length >= 3);
-      } catch (err) {
-        console.error("Error fetching bids:", err);
-      }
-    };
 
     fetchBids();
   }, [id]);
+
+  const fetchBids = async () => {
+    try {
+      const res = await fetch(
+        `https://freelance-task-marketplace-server-mauve.vercel.app/tasks/bids?taskId=${id}`
+      );
+      const data = await res.json();
+      setBidHistory(data);
+      setDiscountApplied(data.length >= 3);
+    } catch (err) {
+      console.error("Error fetching bids:", err);
+    }
+  };
 
   const handleBidSubmit = async (e) => {
     e.preventDefault();
@@ -54,28 +57,29 @@ const TaskDetails = () => {
     };
 
     try {
-      const res = await fetch("https://freelance-task-marketplace-server-mauve.vercel.app/bids", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bidData),
-      });
-
-      console.log(bidData)
+      const res = await fetch(
+        "https://freelance-task-marketplace-server-mauve.vercel.app/tasks/bids",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bidData),
+        }
+      );
 
       const result = await res.json();
 
       if (result.insertedId) {
-        alert("Bid submitted successfully!");
+        Swal.fire({
+          title: "Success!",
+          text: "Bid submitted successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
         setBidAmount("");
         setBidDeadline("");
-        const updatedRes = await fetch(
-          `https://freelance-task-marketplace-server-mauve.vercel.app/bids?taskId=${id}`
-        );
-        const updatedBids = await updatedRes.json();
-        setBidHistory(updatedBids);
-        setDiscountApplied(updatedBids.length >= 3);
+        fetchBids();
       }
     } catch (error) {
       console.error("Error submitting bid:", error);

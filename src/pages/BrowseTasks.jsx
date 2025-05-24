@@ -17,6 +17,7 @@ console.log(motion)
 
 const BrowseTasks = () => {
   const loadedTasks = useLoaderData();
+  console.log(loadedTasks)
   const [tasks] = useState(loadedTasks);
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);

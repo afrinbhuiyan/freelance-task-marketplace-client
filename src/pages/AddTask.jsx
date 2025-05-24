@@ -1,10 +1,10 @@
-import React, { use } from "react";
+import React,{ useContext } from "react";
 import { AuthContext } from "../provider/AuthContext";
 import Swal from "sweetalert2";
 import Bg from "../assets/loginBackround.png";
 
 const AddTask = () => {
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +15,8 @@ const AddTask = () => {
 
     newTask.userEmail = user?.email;
     newTask.userName = user?.displayName;
+
+    console.log(newTask)
 
     fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks", {
       method: "POST",
