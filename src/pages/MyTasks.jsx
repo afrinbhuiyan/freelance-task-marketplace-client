@@ -107,36 +107,37 @@ const MyTasks = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-amber-50 py-8 px-4 sm:px-6 lg:px-8 mt-28">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-amber-50 py-4 md:py-6 px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 lg:pt-24">
       <div className="max-w-7xl mx-auto">
-
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        {/* Header Section - Optimized for iPad mini */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4 mb-4 md:mb-6 lg:mb-8">
           <Link
             to="/"
-            className="flex items-center text-amber-800 hover:text-amber-900 transition-colors"
+            className="flex items-center text-amber-800 hover:text-amber-900 transition-colors order-1 md:order-none text-xs md:text-sm"
           >
-            <FaArrowLeft className="mr-2" />
-            <span className="text-sm sm:text-base">Back to Home</span>
+            <FaArrowLeft className="mr-1 md:mr-2" size={14} />
+            <span>Back to Home</span>
           </Link>
 
-          <h1 className="text-2xl sm:text-3xl font-bold text-amber-900 text-center sm:text-left">
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-amber-900 text-center md:text-left order-3 md:order-none w-full md:w-auto mt-2 md:mt-0">
             My Posted Tasks
           </h1>
 
           <Link
             to="/add-task"
-            className="px-3 py-2 sm:px-4 sm:py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors text-sm sm:text-base w-full sm:w-auto text-center"
+            className="px-3 py-1.5 md:px-4 md:py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors text-xs md:text-sm w-full md:w-auto text-center order-2 md:order-none"
           >
             Add New Task
           </Link>
         </div>
 
+        {/* Tasks List */}
         {tasks.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-12 text-center">
+          <div className="bg-white rounded-lg md:rounded-xl lg:rounded-2xl shadow p-4 md:p-6 lg:p-8 xl:p-12 text-center">
             <div className="max-w-md mx-auto">
-              <div className="text-amber-500 mb-4">
+              <div className="text-amber-500 mb-3 md:mb-4">
                 <svg
-                  className="w-12 h-12 sm:w-16 sm:h-16 mx-auto"
+                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 mx-auto"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -149,71 +150,71 @@ const MyTasks = () => {
                   ></path>
                 </svg>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                 No tasks posted yet
               </h3>
-              <p className="text-gray-600 mb-6 text-sm sm:text-base">
+              <p className="text-gray-600 mb-4 md:mb-6 text-xs sm:text-sm md:text-base">
                 You haven't posted any tasks yet. Click the button below to
                 create your first task.
               </p>
               <Link
                 to="/add-task"
-                className="inline-block px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-medium text-sm sm:text-base"
+                className="inline-block px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-medium text-xs sm:text-sm md:text-base"
               >
                 Create Your First Task
               </Link>
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-amber-200">
-
-            <div className="sm:hidden space-y-4 p-4">
+          <div className="bg-white rounded-lg md:rounded-xl lg:rounded-2xl shadow-md md:shadow-lg overflow-hidden border border-amber-200">
+            {/* Mobile View (Cards) - shows on screens < 768px */}
+            <div className="md:hidden space-y-3 p-3">
               {tasks.map((task) => (
                 <div
                   key={task._id}
-                  className="border border-amber-200 rounded-lg p-4 hover:bg-amber-50 transition-colors"
+                  className="border border-amber-200 rounded-lg p-3 hover:bg-amber-50 transition-colors"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 font-bold mr-3">
+                      <div className="flex-shrink-0 h-8 w-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 font-bold mr-2">
                         {task.title.charAt(0)}
                       </div>
                       <div>
-                        <h3 className="text-sm font-medium text-gray-900">
+                        <h3 className="text-xs font-medium text-gray-900">
                           {task.title}
                         </h3>
-                        <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                        <p className="text-2xs text-gray-500 mt-1 line-clamp-2">
                           {task.description}
                         </p>
                       </div>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-1">
                       <Link
                         to={`/update-task/${task._id}`}
                         className="text-amber-600 hover:text-amber-800 p-1 rounded hover:bg-amber-100 transition-colors"
                         title="Edit"
                       >
-                        <FaEdit size={14} />
+                        <FaEdit size={12} />
                       </Link>
                       <button
                         onClick={() => handleDelete(task)}
                         className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-100 transition-colors"
                         title="Delete"
                       >
-                        <FaTrash size={14} />
+                        <FaTrash size={12} />
                       </button>
                     </div>
                   </div>
 
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="px-2 py-1 text-xs rounded-full bg-amber-100 text-amber-800">
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    <span className="px-1.5 py-0.5 text-2xs rounded-full bg-amber-100 text-amber-800">
                       {task.category || "General"}
                     </span>
-                    <span className="px-2 py-1 text-xs font-medium text-gray-900">
+                    <span className="px-1.5 py-0.5 text-2xs font-medium text-gray-900">
                       ${task.price || "0"}
                     </span>
                     <span
-                      className={`px-2 py-1 rounded-full text-xs ${
+                      className={`px-1.5 py-0.5 rounded-full text-2xs ${
                         task.status === "Completed"
                           ? "bg-green-100 text-green-800"
                           : task.status === "In Progress"
@@ -225,49 +226,141 @@ const MyTasks = () => {
                     </span>
                   </div>
 
-                  <div className="mt-3">
+                  <div className="mt-2">
                     <Link
                       to={`/view-bids/${task._id}`}
-                      className="text-sm text-indigo-600 hover:text-indigo-800 inline-flex items-center"
+                      className="text-2xs text-indigo-600 hover:text-indigo-800 inline-flex items-center"
                     >
-                      View Bids <FaHandshake className="ml-1" size={14} />
+                      View Bids <FaHandshake className="ml-1" size={10} />
                     </Link>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="hidden sm:block overflow-x-auto">
+            {/* iPad Mini Optimized View (768px-1024px) */}
+            <div className="hidden md:block lg:hidden overflow-x-auto">
               <table className="min-w-full divide-y divide-amber-200">
                 <thead className="bg-amber-50">
                   <tr>
                     <th
                       scope="col"
-                      className="px-4 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
+                      className="px-3 py-2 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
                     >
                       Task
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
-                    >
-                      Category
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
-                    >
-                      Price
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
+                      className="px-3 py-2 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
                     >
                       Status
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-3 text-right text-xs font-medium text-amber-800 uppercase tracking-wider"
+                      className="px-3 py-2 text-right text-xs font-medium text-amber-800 uppercase tracking-wider"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-amber-200">
+                  {tasks.map((task) => (
+                    <tr
+                      key={task._id}
+                      className="hover:bg-amber-50 transition-colors"
+                    >
+                      <td className="px-3 py-2">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-8 w-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 font-bold">
+                            {task.title.charAt(0)}
+                          </div>
+                          <div className="ml-3">
+                            <div className="text-xs font-medium text-gray-900">
+                              {task.title}
+                            </div>
+                            <div className="text-2xs text-gray-500">
+                              {task.category || "General"} • $
+                              {task.budget || "0"}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-3 py-2">
+                        <span
+                          className={`px-2 py-1 rounded-full text-2xs font-medium ${
+                            task.status === "Completed"
+                              ? "bg-green-100 text-green-800"
+                              : task.status === "In Progress"
+                              ? "bg-blue-100 text-blue-800"
+                              : "bg-amber-100 text-amber-800"
+                          }`}
+                        >
+                          {task.status || "Not Started"}
+                        </span>
+                      </td>
+                      <td className="px-3 py-2 text-right text-xs font-medium">
+                        <div className="flex justify-end space-x-1">
+                          <Link
+                            to={`/update-task/${task._id}`}
+                            className="text-amber-600 hover:text-amber-800 p-1 rounded hover:bg-amber-100 transition-colors"
+                            title="Edit"
+                          >
+                            <FaEdit size={12} />
+                          </Link>
+                          <button
+                            onClick={() => handleDelete(task)}
+                            className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-100 transition-colors"
+                            title="Delete"
+                          >
+                            <FaTrash size={12} />
+                          </button>
+                          <Link
+                            to={`/view-bids/${task._id}`}
+                            className="text-indigo-600 hover:text-indigo-800 p-1 rounded hover:bg-indigo-100 transition-colors"
+                            title="View Bids"
+                          >
+                            <FaHandshake size={12} />
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="min-w-full divide-y divide-amber-200">
+                <thead className="bg-amber-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-amber-800 uppercase tracking-wider"
+                    >
+                      Task
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-amber-800 uppercase tracking-wider"
+                    >
+                      Category
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-amber-800 uppercase tracking-wider"
+                    >
+                      Price
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-amber-800 uppercase tracking-wider"
+                    >
+                      Status
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right text-xs sm:text-sm font-medium text-amber-800 uppercase tracking-wider"
                     >
                       Actions
                     </th>
@@ -288,7 +381,7 @@ const MyTasks = () => {
                             <div className="text-sm font-medium text-gray-900">
                               {task.title}
                             </div>
-                            <div className="text-sm text-gray-500 line-clamp-1 max-w-xs">
+                            <div className="text-xs text-gray-500 line-clamp-1 max-w-xs">
                               {task.description}
                             </div>
                           </div>
@@ -304,7 +397,7 @@ const MyTasks = () => {
                       </td>
                       <td className="px-4 py-4">
                         <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          className={`px-2 py-1 rounded-full text-xs font-medium border${
                             task.status === "Completed"
                               ? "bg-green-100 text-green-800"
                               : task.status === "In Progress"
@@ -312,7 +405,7 @@ const MyTasks = () => {
                               : "bg-amber-100 text-amber-800"
                           }`}
                         >
-                          {task.status || "Not Started"}
+                          {task.status || "NotSStarted"}
                         </span>
                       </td>
                       <td className="px-4 py-4 text-right text-sm font-medium">

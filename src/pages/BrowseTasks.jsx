@@ -74,7 +74,7 @@ const BrowseTasks = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt-18">
       <div
         className="lg:p-20 lg:px-40 p-8 bg-cover bg-center"
         style={{ backgroundImage: `url(${BImg})` }}
