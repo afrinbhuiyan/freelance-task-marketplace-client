@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { Link } from "react-router";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -103,13 +104,13 @@ const Footer = () => {
                 "Pricing",
               ].map((item) => (
                 <li key={item}>
-                  <a
-                    href="#"
+                  <Link
+                    
                     className="text-gray-300 hover:text-yellow-400 transition-colors flex items-center group"
                   >
                     <span className="w-2 h-2 bg-yellow-400 mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                     {item}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
