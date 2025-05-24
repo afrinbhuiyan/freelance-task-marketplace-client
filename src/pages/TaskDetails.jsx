@@ -34,7 +34,7 @@ const TaskDetails = () => {
   const fetchBids = async () => {
     try {
       const res = await fetch(
-        `https://freelance-task-marketplace-server-mauve.vercel.app/tasks/bids?taskId=${id}`
+        `https://freelance-task-marketplace-server-mauve.vercel.app/bids?taskId=${id}`
       );
       const data = await res.json();
       setBidHistory(data);
@@ -58,7 +58,7 @@ const TaskDetails = () => {
 
     try {
       const res = await fetch(
-        "https://freelance-task-marketplace-server-mauve.vercel.app/tasks/bids",
+        "https://freelance-task-marketplace-server-mauve.vercel.app/bids",
         {
           method: "POST",
           headers: {
