@@ -40,11 +40,11 @@ const Header = () => {
 
   const handleSignOut = () => {
     logout()
-      .than(() => {
+      .then(() => {
         console.log("logOUT");
       })
       .catch((error) => {
-        console.log(error.massage);
+        console.log(error.message);
       });
   };
 
@@ -80,12 +80,17 @@ const Header = () => {
             <ThemeToggle />
           </div>
           {user ? (
-            <div className="relative" ref={dropdownRef}>
+            <div 
+              className="relative" 
+              ref={dropdownRef}
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
+            >
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center gap-2 focus:outline-none"
               >
-                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 hover:border-indigo-400 transition-all duration-200">
+                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 hover:border-yellow-400 transition-all duration-200">
                   <img
                     className="w-full h-full object-cover"
                     src={user.photoURL || "https://i.imgur.com/7k12EPD.png"}
@@ -95,13 +100,13 @@ const Header = () => {
               </button>
 
               <div
-                className={`absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 ease-out origin-top-right z-50 ${
+                className={`absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-200 ease-out origin-top-right z-50 ${
                   isOpen
                     ? "opacity-100 scale-100 translate-y-0"
                     : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
                 }`}
               >
-                <div className="p-4 bg-gradient-to-r from-indigo-500 to-purple-600">
+                <div className="p-4 bg-gradient-to-r from-[#f0da62] to-[#d3b638]">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
                       <img
@@ -122,16 +127,22 @@ const Header = () => {
                 <div className="divide-y divide-gray-100">
                   <NavLink
                     to="/profile"
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50 transition-colors flex items-center gap-2"
                     onClick={() => setIsOpen(false)}
                   >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
                     Profile Settings
                   </NavLink>
                   <NavLink
                     to="/my-tasks"
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50 transition-colors flex items-center gap-2"
                     onClick={() => setIsOpen(false)}
                   >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
                     My Tasks
                   </NavLink>
                   <button
@@ -139,8 +150,11 @@ const Header = () => {
                       handleSignOut();
                       setIsOpen(false);
                     }}
-                    className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                    className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
                   >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
                     Sign Out
                   </button>
                 </div>

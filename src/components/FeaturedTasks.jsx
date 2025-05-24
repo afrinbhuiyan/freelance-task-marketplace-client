@@ -89,7 +89,7 @@ const FeaturedTasks = () => {
     <section className="px-4 pt-12 pb-20 border-gray-50 rounded-xl">
       <div className="max-w-7xl mx-auto">
         <div className="text-start mb-16">
-          <h2 className="text-3xl text-gray-800 mb-3 roboto">Featured Tasks</h2>
+          <h2 className="text-3xl mb-3 roboto">Featured Tasks</h2>
           <p className="text-gray-600 max-w-2xl roboto">
             Browse through our hand-picked selection of premium tasks
           </p>
@@ -158,7 +158,6 @@ const FeaturedTasks = () => {
                 </div>
               </div>
 
-              {/* View Details Button */}
               <button className="mt-auto w-full bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium py-2 rounded-lg flex items-center justify-center gap-2 transition duration-300">
                 View Details
                 <svg

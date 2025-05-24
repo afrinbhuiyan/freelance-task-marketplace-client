@@ -1,11 +1,11 @@
 import React, { useState, useEffect, use } from "react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
-import { FaEdit, FaTrash, FaHandshake, FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaEdit, FaTrash, FaHandshake } from "react-icons/fa";
 import { AuthContext } from "../provider/AuthContext";
 
 const MyTasks = () => {
-  const { user } = use(AuthContext)
+  const { user } = use(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   // const navigate = useNavigate();
@@ -14,11 +14,13 @@ const MyTasks = () => {
 
   useEffect(() => {
     if (userEmail) {
-      fetch(`https://freelance-task-marketplace-server-mauve.vercel.app/tasks?email=${userEmail}`)
+      fetch(
+        `https://freelance-task-marketplace-server-mauve.vercel.app/tasks?email=${userEmail}`
+      )
         .then((res) => res.json())
         .then((data) => {
-          setTasks(data)
-          setLoading(false)
+          setTasks(data);
+          setLoading(false);
         });
     }
   }, [userEmail]);
@@ -98,38 +100,44 @@ const MyTasks = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-yellow-100 flex items-center justify-center">
-        <div className="text-amber-900 text-2xl">Loading your tasks...</div>
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-400"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-yellow-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-amber-50 py-8 px-4 sm:px-6 lg:px-8 mt-28">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <Link
             to="/"
-            className="flex items-center text-amber-800 hover:text-amber-900"
+            className="flex items-center text-amber-800 hover:text-amber-900 transition-colors"
           >
             <FaArrowLeft className="mr-2" />
-            Back to Home
+            <span className="text-sm sm:text-base">Back to Home</span>
           </Link>
-          <h1 className="text-3xl font-bold text-amber-900">My Posted Tasks</h1>
+
+          <h1 className="text-2xl sm:text-3xl font-bold text-amber-900 text-center sm:text-left">
+            My Posted Tasks
+          </h1>
+
           <Link
             to="/add-task"
-            className="px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors"
+            className="px-3 py-2 sm:px-4 sm:py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors text-sm sm:text-base w-full sm:w-auto text-center"
           >
             Add New Task
           </Link>
         </div>
 
+        {/* Empty State */}
         {tasks.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
+          <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-12 text-center">
             <div className="max-w-md mx-auto">
               <div className="text-amber-500 mb-4">
                 <svg
-                  className="w-16 h-16 mx-auto"
+                  className="w-12 h-12 sm:w-16 sm:h-16 mx-auto"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -142,16 +150,16 @@ const MyTasks = () => {
                   ></path>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
                 No tasks posted yet
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-6 text-sm sm:text-base">
                 You haven't posted any tasks yet. Click the button below to
                 create your first task.
               </p>
               <Link
                 to="/add-task"
-                className="px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-medium"
+                className="inline-block px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-medium text-sm sm:text-base"
               >
                 Create Your First Task
               </Link>
@@ -159,37 +167,109 @@ const MyTasks = () => {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-amber-200">
-            <div className="overflow-x-auto">
+            {/* Mobile Cards View */}
+            <div className="sm:hidden space-y-4 p-4">
+              {tasks.map((task) => (
+                <div
+                  key={task._id}
+                  className="border border-amber-200 rounded-lg p-4 hover:bg-amber-50 transition-colors"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 font-bold mr-3">
+                        {task.title.charAt(0)}
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-medium text-gray-900">
+                          {task.title}
+                        </h3>
+                        <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                          {task.description}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2">
+                      <Link
+                        to={`/update-task/${task._id}`}
+                        className="text-amber-600 hover:text-amber-800 p-1 rounded hover:bg-amber-100 transition-colors"
+                        title="Edit"
+                      >
+                        <FaEdit size={14} />
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(task)}
+                        className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-100 transition-colors"
+                        title="Delete"
+                      >
+                        <FaTrash size={14} />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <span className="px-2 py-1 text-xs rounded-full bg-amber-100 text-amber-800">
+                      {task.category || "General"}
+                    </span>
+                    <span className="px-2 py-1 text-xs font-medium text-gray-900">
+                      ${task.price || "0"}
+                    </span>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        task.status === "Completed"
+                          ? "bg-green-100 text-green-800"
+                          : task.status === "In Progress"
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-amber-100 text-amber-800"
+                      }`}
+                    >
+                      {task.status || "Not Started"}
+                    </span>
+                  </div>
+
+                  <div className="mt-3">
+                    <Link
+                      to={`/view-bids/${task._id}`}
+                      className="text-sm text-indigo-600 hover:text-indigo-800 inline-flex items-center"
+                    >
+                      View Bids <FaHandshake className="ml-1" size={14} />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden sm:block overflow-x-auto">
               <table className="min-w-full divide-y divide-amber-200">
                 <thead className="bg-amber-50">
                   <tr>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
+                      className="px-4 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
                     >
                       Task
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
+                      className="px-4 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
                     >
                       Category
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
+                      className="px-4 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
                     >
                       Price
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
+                      className="px-4 py-3 text-left text-xs font-medium text-amber-800 uppercase tracking-wider"
                     >
                       Status
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-right text-xs font-medium text-amber-800 uppercase tracking-wider"
+                      className="px-4 py-3 text-right text-xs font-medium text-amber-800 uppercase tracking-wider"
                     >
                       Actions
                     </th>
@@ -201,7 +281,7 @@ const MyTasks = () => {
                       key={task._id}
                       className="hover:bg-amber-50 transition-colors"
                     >
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-4 py-4">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 font-bold">
                             {task.title.charAt(0)}
@@ -216,15 +296,15 @@ const MyTasks = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-4 py-4">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-amber-100 text-amber-800">
                           {task.category || "General"}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        ${task.price || "0"}
+                      <td className="px-4 py-4 text-sm font-medium text-gray-900">
+                        ${task.budget || "0"}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-4 py-4">
                         <span
                           className={`px-2 py-1 rounded-full text-xs font-medium ${
                             task.status === "Completed"
@@ -237,28 +317,28 @@ const MyTasks = () => {
                           {task.status || "Not Started"}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <td className="px-4 py-4 text-right text-sm font-medium">
                         <div className="flex justify-end space-x-2">
                           <Link
                             to={`/update-task/${task._id}`}
                             className="text-amber-600 hover:text-amber-800 p-2 rounded hover:bg-amber-100 transition-colors"
                             title="Edit"
                           >
-                            <FaEdit />
+                            <FaEdit size={16} />
                           </Link>
                           <button
                             onClick={() => handleDelete(task)}
                             className="text-red-600 hover:text-red-800 p-2 rounded hover:bg-red-100 transition-colors"
                             title="Delete"
                           >
-                            <FaTrash />
+                            <FaTrash size={16} />
                           </button>
                           <Link
                             to={`/view-bids/${task._id}`}
                             className="text-indigo-600 hover:text-indigo-800 p-2 rounded hover:bg-indigo-100 transition-colors"
                             title="View Bids"
                           >
-                            <FaHandshake />
+                            <FaHandshake size={16} />
                           </Link>
                         </div>
                       </td>

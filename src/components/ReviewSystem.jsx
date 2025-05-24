@@ -77,14 +77,14 @@ const FreelancerReviewSystem = () => {
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           {/* Left Column */}
           <div className="w-full lg:w-1/2">
             <div className="text-center lg:text-left">
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center mb-8">
-                <div className="text-5xl font-bold text-gray-900 mr-0 sm:mr-4 mb-2 sm:mb-0">
+                <div className="text-5xl font-bold mr-0 sm:mr-4 mb-2 sm:mb-0">
                   4.9<span className="text-2xl text-gray-500">/5</span>
                 </div>
                 <div className="text-gray-600 text-center sm:text-left">
@@ -93,11 +93,11 @@ const FreelancerReviewSystem = () => {
                 </div>
               </div>
 
-              <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+              <div className="text-3xl sm:text-4xl font-bold mb-6">
                 88M+ Happy Clients
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold  mb-4">
                 Join World's Best Marketplace for Workers
               </h2>
 

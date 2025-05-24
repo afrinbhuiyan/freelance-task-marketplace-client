@@ -89,12 +89,12 @@ const categories = [
 
 const BrowseCategory = () => {
   return (
-    <div className="bg-white py-16 lg:py-28 px-4">
+    <div className="py-16 lg:py-28 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Title Section */}
         <Reveal keyframes={customAnimation} triggerOnce duration={800}>
           <div className="text-start">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl text-gray-800 mb-2 md:mb-3 roboto">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl mb-2 md:mb-3 roboto">
               Browse Services by Category
             </h2>
             <p className="text-gray-600 roboto text-sm md:text-base">
@@ -129,7 +129,7 @@ const BrowseCategory = () => {
               cascade
             >
               <div
-                className={`relative group overflow-hidden rounded-xl p-6 h-full hover:border-l-4 border-yellow-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-2`}
+                className={`relative group bg-white overflow-hidden rounded-xl p-6 h-full hover:border-l-4 border-yellow-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-2`}
               >
                 <div className="py-4 text-yellow-500">{category.icon}</div>
                 <h3 className="text-xl font-bold text-gray-800 relative z-10">

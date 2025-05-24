@@ -6,9 +6,10 @@ import MyTasks from "../pages/MyTasks";
 import TaskDetails from "../pages/TaskDetails";
 import UpdateTask from "../pages/UpdateTask";
 import BrowseTasks from "../pages/BrowseTasks";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import Signup from "../pages/Signup";
+import { lazy, Suspense } from "react";
+const Home = lazy(() => import("../pages/Home"));
+const Login = lazy(() => import("../pages/Login"));
+const Signup = lazy(() => import("../pages/Signup"));
 import ViewBids from "../pages/viewBids";
 import ErrorPage from "../pages/ErrorPage";
 
@@ -20,10 +21,46 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        Component: Home,
+        element: (
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+              </div>
+            }
+          >
+            <Home />
+          </Suspense>
+        ),
       },
-      { path: "/login", Component: Login },
-      { path: "/signup", Component: Signup },
+      {
+        path: "/login",
+        element: (
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+              </div>
+            }
+          >
+            <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/signup",
+        element: (
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+              </div>
+            }
+          >
+            <Signup />
+          </Suspense>
+        ),
+      },
       {
         path: "/add-task",
         element: (
@@ -42,7 +79,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/browse-tasks/:id",
-        loader: () => fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks"),
+        loader: () =>
+          fetch(
+            "https://freelance-task-marketplace-server-mauve.vercel.app/tasks"
+          ),
+        hydrateFallbackElement: (
+          <div className="flex justify-center items-center min-h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+          </div>
+        ),
         element: (
           <PrivateRoute>
             <TaskDetails />
@@ -51,7 +96,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/update-task/:id",
-        loader: ({ params }) => fetch(`https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${params.id}`),
+        loader: ({ params }) =>
+          fetch(
+            `https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${params.id}`
+          ),
+        hydrateFallbackElement: (
+          <div className="flex justify-center items-center min-h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+          </div>
+        ),
         element: (
           <PrivateRoute>
             <UpdateTask />
@@ -60,7 +113,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/view-bids/:id",
-        loader: ({ params }) => fetch(`https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${params.id}`),
+        loader: ({ params }) =>
+          fetch(
+            `https://freelance-task-marketplace-server-mauve.vercel.app/tasks/${params.id}`
+          ),
+        hydrateFallbackElement: (
+          <div className="flex justify-center items-center min-h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+          </div>
+        ),
         element: (
           <PrivateRoute>
             <ViewBids></ViewBids>
@@ -70,7 +131,15 @@ const router = createBrowserRouter([
       {
         path: "/browse-tasks",
         Component: BrowseTasks,
-        loader: () => fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks"),
+        loader: () =>
+          fetch(
+            "https://freelance-task-marketplace-server-mauve.vercel.app/tasks"
+          ),
+        hydrateFallbackElement: (
+          <div className="flex justify-center items-center min-h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+          </div>
+        ),
       },
     ],
   },
