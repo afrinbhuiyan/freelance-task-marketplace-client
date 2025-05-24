@@ -159,7 +159,6 @@ const TaskDetails = () => {
         </div>
       </div>
 
-      {/* Bid Form */}
       <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-yellow-100 mb-8">
         <div className="bg-yellow-50 p-4 border-b border-yellow-200">
           <h3 className="text-xl font-semibold text-yellow-800">
@@ -205,7 +204,6 @@ const TaskDetails = () => {
         </div>
       </div>
 
-      {/* Bid History */}
       <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-yellow-100">
         <div className="bg-yellow-50 p-4 border-b border-yellow-200">
           <h3 className="text-xl font-semibold text-yellow-800">

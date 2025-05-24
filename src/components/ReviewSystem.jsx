@@ -80,7 +80,6 @@ const FreelancerReviewSystem = () => {
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
-          {/* Left Column */}
           <div className="w-full lg:w-1/2">
             <div className="text-center lg:text-left">
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center mb-8">
@@ -137,9 +136,7 @@ const FreelancerReviewSystem = () => {
             </div>
           </div>
 
-          {/* Right Column - Reviews */}
           <div className="w-full lg:w-1/2">
-            {/* Tabs */}
             <div className="flex border-b border-gray-200 mb-6">
               <button
                 onClick={() => setActiveTab("read")}

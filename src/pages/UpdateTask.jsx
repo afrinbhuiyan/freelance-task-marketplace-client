@@ -81,237 +81,6 @@ const UpdateTask = () => {
           <h2 className="text-4xl roboto sm:text-5xl">Update Task</h2>
           <p className="mt-4 text-xl roboto">Modify the details of your task</p>
         </div>
-
-        {/* <div className="bg-amber-50 shadow-2xl rounded-3xl overflow-hidden border-2 border-amber-200">
-          <div className="p-8 sm:p-10">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label
-                  htmlFor="imageUrl"
-                  className="block text-sm font-medium text-amber-900"
-                >
-                  Task Image URL
-                </label>
-                <input
-                  type="url"
-                  id="imageUrl"
-                  name="imageUrl"
-                  defaultValue={task?.imageUrl}
-                  className="block w-full px-4 py-3 rounded-xl border border-amber-300 focus:ring-2 focus:ring-amber-500 bg-amber-100/50"
-                  pattern="https://.*"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="title"
-                    className="block text-sm font-medium text-amber-900"
-                  >
-                    Task Title *
-                  </label>
-                  <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    defaultValue={task.title}
-                    required
-                    className="block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-100/50"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="priority"
-                    className="block text-sm font-medium text-amber-900"
-                  >
-                    Priority Level *
-                  </label>
-                  <select
-                    id="priority"
-                    name="priority"
-                    defaultValue={task.priority}
-                    required
-                    className="block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-100/50"
-                  >
-                    <option value="">Select priority</option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                    <option value="Urgent">Urgent</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="category"
-                    className="block text-sm font-medium text-amber-900"
-                  >
-                    Category *
-                  </label>
-                  <select
-                    id="category"
-                    name="category"
-                    defaultValue={task.category}
-                    required
-                    className="block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-100/50"
-                  >
-                    <option value="">Select category</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="Design">Design</option>
-                    <option value="Writing">Writing</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Research">Research</option>
-                    <option value="Personal">Personal</option>
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="deadline"
-                    className="block text-sm font-medium text-amber-900"
-                  >
-                    Deadline *
-                  </label>
-                  <input
-                    type="date"
-                    id="deadline"
-                    name="deadline"
-                    defaultValue={task.deadline}
-                    required
-                    className="block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-100/50"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="estimatedTime"
-                    className="block text-sm font-medium text-amber-900"
-                  >
-                    Estimated Time (hours)
-                  </label>
-                  <input
-                    type="number"
-                    id="estimatedTime"
-                    name="estimatedTime"
-                    defaultValue={task.estimatedTime}
-                    step="0.5"
-                    className="block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-100/50"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="description"
-                  className="block text-sm font-medium text-amber-900"
-                >
-                  Detailed Description *
-                </label>
-                <textarea
-                  id="description"
-                  name="description"
-                  rows={5}
-                  required
-                  defaultValue={task.description}
-                  className="block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-100/50"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="budget"
-                    className="block text-sm font-medium text-amber-900"
-                  >
-                    Budget
-                  </label>
-                  <div className="relative">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                      $
-                    </span>
-                    <input
-                      type="number"
-                      id="budget"
-                      name="budget"
-                      defaultValue={task.budget}
-                      step="0.01"
-                      className="pl-8 block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-100/50"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="status"
-                    className="block text-sm font-medium text-amber-900"
-                  >
-                    Status
-                  </label>
-                  <select
-                    id="status"
-                    name="status"
-                    defaultValue={task.status}
-                    className="block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-100/50"
-                  >
-                    <option value="Not Started">Not Started</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="On Hold">On Hold</option>
-                    <option value="Completed">Completed</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-amber-900"
-                  >
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={user?.email}
-                    readOnly
-                    className="block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-200/50 cursor-not-allowed"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-amber-900"
-                  >
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={user?.displayName}
-                    readOnly
-                    className="block w-full px-4 py-3 rounded-xl border border-amber-300 bg-amber-200/50 cursor-not-allowed"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-6">
-                <button
-                  type="submit"
-                  className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl shadow-lg text-lg font-bold text-amber-900 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
-                >
-                  Update Task
-                </button>
-              </div>
-            </form>
-          </div>
-        </div> */}
-
         <div className="bg-white rounded-2xl shadow-xl p-10 md:p-12 border border-gray-200">
           <div className="mb-10 text-center">
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
@@ -323,7 +92,6 @@ const UpdateTask = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Task Image */}
             <div>
               <label
                 htmlFor="imageUrl"
@@ -345,7 +113,6 @@ const UpdateTask = () => {
               </p>
             </div>
 
-            {/* Title & Priority */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
@@ -387,8 +154,7 @@ const UpdateTask = () => {
                 </select>
               </div>
             </div>
-
-            {/* Category, Deadline, Time */}
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label
@@ -451,7 +217,6 @@ const UpdateTask = () => {
               </div>
             </div>
 
-            {/* Description */}
             <div>
               <label
                 htmlFor="description"
@@ -470,7 +235,6 @@ const UpdateTask = () => {
               />
             </div>
 
-            {/* Budget & Status */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
@@ -516,7 +280,6 @@ const UpdateTask = () => {
               </div>
             </div>
 
-            {/* User Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
@@ -552,7 +315,6 @@ const UpdateTask = () => {
               </div>
             </div>
 
-            {/* Submit */}
             <div>
               <button
                 type="submit"

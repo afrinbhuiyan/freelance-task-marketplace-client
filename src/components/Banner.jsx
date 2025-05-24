@@ -187,7 +187,6 @@ const Banner = () => {
           </SwiperSlide>
         ))}
 
-        {/* Navigation Buttons */}
         <div className="absolute z-30 bottom-8 right-8 md:bottom-auto md:right-8 md:top-1/2 md:-translate-y-1/2">
           <div className="swiper-button-next !text-white !bg-white/10 !backdrop-blur-sm !w-12 !h-12 !rounded-full !border !border-white/20 after:!text-xl hover:!scale-110 transition-transform"></div>
         </div>

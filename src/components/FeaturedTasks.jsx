@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const FeaturedTasks = () => {
   const [featuredTasks, setFeaturedTasks] = useState([]);
@@ -104,7 +105,6 @@ const FeaturedTasks = () => {
               key={task._id}
               className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 p-6 flex flex-col justify-between"
             >
-              {/* Header */}
               <div className="mb-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold text-gray-800 hover:text-yellow-600 transition-colors duration-200">
@@ -119,7 +119,6 @@ const FeaturedTasks = () => {
                 </p>
               </div>
 
-              {/* Skills */}
               {task.skills && task.skills.length > 0 && (
                 <div className="mb-4">
                   <h4 className="text-sm font-medium text-gray-500 mb-1">
@@ -145,7 +144,6 @@ const FeaturedTasks = () => {
                 </div>
               )}
 
-              {/* Info Section */}
               <div className="text-sm text-gray-500 space-y-1 mb-6">
                 <div className="flex justify-between">
                   <span>Deadline:</span>
@@ -161,22 +159,24 @@ const FeaturedTasks = () => {
                 </div>
               </div>
 
-              <button className="mt-auto w-full bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium py-2 rounded-lg flex items-center justify-center gap-2 transition duration-300">
-                View Details
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
+              <Link to={`/browse-tasks/${task._id}`}>
+                <button className="mt-auto w-full bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium py-2 rounded-lg flex items-center justify-center gap-2 transition duration-300">
+                  View Details
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </Link>
             </div>
           ))}
         </div>

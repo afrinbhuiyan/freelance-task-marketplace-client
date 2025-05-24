@@ -9,7 +9,7 @@ const MainLayout = () => {
       <div className="absolute top-0 left-0 right-0 z-50 bg-transparent">
         <Header />
       </div>
-      {/* <header className="h-20 border"></header> */}
+
       <main>
         <Outlet />
       </main>

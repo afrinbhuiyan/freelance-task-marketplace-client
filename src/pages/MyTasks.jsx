@@ -109,7 +109,7 @@ const MyTasks = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-amber-50 py-8 px-4 sm:px-6 lg:px-8 mt-28">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
+
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <Link
             to="/"
@@ -131,7 +131,6 @@ const MyTasks = () => {
           </Link>
         </div>
 
-        {/* Empty State */}
         {tasks.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-12 text-center">
             <div className="max-w-md mx-auto">
@@ -167,7 +166,7 @@ const MyTasks = () => {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-amber-200">
-            {/* Mobile Cards View */}
+
             <div className="sm:hidden space-y-4 p-4">
               {tasks.map((task) => (
                 <div
@@ -238,7 +237,6 @@ const MyTasks = () => {
               ))}
             </div>
 
-            {/* Desktop Table View */}
             <div className="hidden sm:block overflow-x-auto">
               <table className="min-w-full divide-y divide-amber-200">
                 <thead className="bg-amber-50">

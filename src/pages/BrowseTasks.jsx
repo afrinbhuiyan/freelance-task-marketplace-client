@@ -108,10 +108,10 @@ const BrowseTasks = () => {
             </h1>
           </div>
         </div>
-        {/* Search and Filter Section */}
+
         <div className="bg-white p-3 max-w-5xl">
           <div className="flex flex-col md:flex-row gap-4">
-            {/* Search Input */}
+
             <div className="relative flex-grow group">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <FaSearch className="text-gray-400 group-focus-within:text-yellow-500 transition-colors" />
@@ -134,7 +134,6 @@ const BrowseTasks = () => {
               )}
             </div>
 
-            {/* Filter Toggle Button */}
             <button
               onClick={() => setShowFilters(!showFilters)}
               className={`relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white border border-yellow-500 hover:bg-white group ${
@@ -158,7 +157,6 @@ const BrowseTasks = () => {
             </button>
           </div>
 
-          {/* Advanced Filters */}
           <AnimatePresence>
             {showFilters && (
               <motion.div
@@ -169,7 +167,6 @@ const BrowseTasks = () => {
                 className="overflow-hidden"
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 pt-6 border-t border-yellow-200 mt-4 mx-1">
-                  {/* Category Filter */}
                   <div className="space-y-1">
                     <label className="block text-xs font-medium text-gray-700 p-1.5">
                       Category
@@ -193,7 +190,6 @@ const BrowseTasks = () => {
                     </div>
                   </div>
 
-                  {/* Price Range */}
                   <div className="space-y-1">
                     <label className="block text-xs font-medium text-gray-700 p-1.5">
                       Price Range
@@ -229,7 +225,6 @@ const BrowseTasks = () => {
                     </div>
                   </div>
 
-                  {/* Location */}
                   <div className="space-y-1">
                     <label className="block text-xs font-medium text-gray-700 p-1.5">
                       Location
@@ -248,7 +243,6 @@ const BrowseTasks = () => {
                     </div>
                   </div>
 
-                  {/* Required Skills */}
                   <div className="space-y-1">
                     <label className="block text-xs font-medium text-gray-700 p-1.5">
                       Required Skills
@@ -267,7 +261,6 @@ const BrowseTasks = () => {
                     </div>
                   </div>
 
-                  {/* Sort By */}
                   <div className="space-y-1">
                     <label className="block text-xs font-medium text-gray-700 p-1.5">
                       Sort By
@@ -290,7 +283,6 @@ const BrowseTasks = () => {
                   </div>
                 </div>
 
-                {/* Filter Actions */}
                 <div className="flex justify-end space-x-3 mt-6 pt-4 border-t border-yellow-300">
                   <button
                     onClick={() =>
@@ -317,7 +309,6 @@ const BrowseTasks = () => {
         </div>
       </div>
       <div className="mx-8 md:mx-12 lg:mx-40">
-        {/* Task Count Info */}
         <div className="flex justify-end my-6">
           <div className="text-sm text-gray-500 hover:text-amber-400">
             Showing {Math.min(filteredTasks.length, 12)} of{" "}
@@ -325,7 +316,6 @@ const BrowseTasks = () => {
           </div>
         </div>
 
-        {/* Task Cards Grid */}
         {filteredTasks.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {filteredTasks.map((task) => (
@@ -333,7 +323,7 @@ const BrowseTasks = () => {
                 key={task._id}
                 className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300"
               >
-                {/* Task Header */}
+
                 <div className="p-5 pb-0">
                   <div className="flex justify-between items-start">
                     <div>
@@ -350,7 +340,6 @@ const BrowseTasks = () => {
                   </div>
                 </div>
 
-                {/* Task Details */}
                 <div className="p-5 pt-3">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                     <div className="flex items-center">
@@ -391,7 +380,7 @@ const BrowseTasks = () => {
                       </span>
                     </div>
                   </div>
-                  {/* Status and Action */}
+
                   <div className="flex justify-between items-center pt-3 border-t border-gray-100">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -448,7 +437,6 @@ const BrowseTasks = () => {
           </div>
         )}
 
-        {/* Pagination (optional) */}
         {filteredTasks.length > 0 && (
           <div className="mt-10 flex justify-center mb-10">
             <nav className="flex items-center space-x-2">
