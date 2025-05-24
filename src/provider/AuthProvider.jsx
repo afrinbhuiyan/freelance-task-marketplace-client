@@ -52,7 +52,6 @@ const AuthProvider = ({ children }) => {
     });
 
     return () => {
-      console.log("AuthProvider cleanup: unsubscribing");
       unsubscribe();
     };
   }, []);

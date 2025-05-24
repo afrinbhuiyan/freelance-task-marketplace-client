@@ -13,11 +13,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronUp, FaTimes } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import BImg from "../assets/br.jpg";
-console.log(motion)
 
 const BrowseTasks = () => {
   const loadedTasks = useLoaderData();
-  console.log(loadedTasks)
   const [tasks] = useState(loadedTasks);
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);

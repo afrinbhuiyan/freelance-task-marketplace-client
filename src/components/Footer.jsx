@@ -50,40 +50,50 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-yellow-400">
+            <Link to="/" className="text-3xl font-bold text-yellow-400 hover:text-yellow-500 transition-colors">
               Task<span className="text-white">Hub</span>
-            </h3>
+            </Link>
             <p className="text-gray-300">
               Connecting skilled professionals with meaningful tasks and
               projects worldwide.
             </p>
             <div className="flex space-x-5">
               <a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
               >
                 <FaFacebook className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
               >
                 <FaTwitter className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
               >
                 <FaInstagram className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
               >
                 <FaLinkedin className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
               >
                 <FaGithub className="w-6 h-6" />
@@ -97,19 +107,19 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3">
               {[
-                "Home",
-                "Browse Tasks",
-                "Post a Task",
-                "How It Works",
-                "Pricing",
+                { name: "Home", path: "/" },
+                { name: "Browse Tasks", path: "/browse-tasks" },
+                { name: "Post a Task", path: "/add-task" },
+                { name: "How It Works", path: "/how-it-works" },
+                { name: "Pricing", path: "/pricing" },
               ].map((item) => (
-                <li key={item}>
+                <li key={item.name}>
                   <Link
-                    
+                    to={item.path}
                     className="text-gray-300 hover:text-yellow-400 transition-colors flex items-center group"
                   >
                     <span className="w-2 h-2 bg-yellow-400 mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}
@@ -123,23 +133,22 @@ const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-start space-x-4">
                 <MdEmail className="text-yellow-400 mt-1 flex-shrink-0 text-xl" />
-                <span className="text-gray-300 hover:text-yellow-400 transition-colors">
+                <a href="mailto:support@taskhub.com" className="text-gray-300 hover:text-yellow-400 transition-colors">
                   support@taskhub.com
-                </span>
+                </a>
               </div>
               <div className="flex items-start space-x-4">
                 <MdPhone className="text-yellow-400 mt-1 flex-shrink-0 text-xl" />
-                <span className="text-gray-300 hover:text-yellow-400 transition-colors">
+                <a href="tel:+15551234567" className="text-gray-300 hover:text-yellow-400 transition-colors">
                   +1 (555) 123-4567
-                </span>
+                </a>
               </div>
               <div className="flex items-start space-x-4">
                 <MdLocationOn className="text-yellow-400 mt-1 flex-shrink-0 text-xl" />
-                <span className="text-gray-300 hover:text-yellow-400 transition-colors">
-                  123 Task Street
-                  <br />
+                <address className="text-gray-300 hover:text-yellow-400 transition-colors not-italic">
+                  123 Task Street<br />
                   San Francisco, CA 94107
-                </span>
+                </address>
               </div>
             </div>
           </div>
@@ -161,10 +170,10 @@ const Footer = () => {
                   className={`w-full px-5 py-3 pr-12 rounded-lg border-2 ${
                     error ? "border-red-500" : "border-gray-700"
                   } 
-            bg-gray-800 text-white placeholder-gray-400 
-            focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30
-            transition-all duration-200 shadow-lg
-            hover:border-gray-600`}
+                  bg-gray-800 text-white placeholder-gray-400 
+                  focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30
+                  transition-all duration-200 shadow-lg
+                  hover:border-gray-600`}
                   required
                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                   aria-label="Email address for newsletter subscription"
@@ -249,17 +258,19 @@ const Footer = () => {
             reserved.
           </p>
           <div className="flex space-x-6">
-            {["Privacy Policy", "Terms of Service", "Cookies Policy"].map(
-              (item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="text-gray-400 hover:text-yellow-400 text-sm transition-colors"
-                >
-                  {item}
-                </a>
-              )
-            )}
+            {[
+              { name: "Privacy Policy", path: "/privacy-policy" },
+              { name: "Terms of Service", path: "/terms" },
+              { name: "Cookies Policy", path: "/cookies" },
+            ].map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className="text-gray-400 hover:text-yellow-400 text-sm transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

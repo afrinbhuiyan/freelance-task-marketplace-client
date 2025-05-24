@@ -21,34 +21,34 @@ const Signup = () => {
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
 
     const { email, password, name, photoURL } = data;
-    console.log(email, password, name, photoURL);
 
     if (password.length < 6) {
       setError("Password must be at least 6 characters");
-      return
+      return;
     }
     if (!/[A-Z]/.test(password)) {
       setError("Password must contain at least one uppercase letter");
-      return
+      return;
     }
     if (!/[a-z]/.test(password)) {
       setError("Password must contain at least one lowercase letter");
-      return
+      return;
     }
 
     createUser(email, password)
       .then((result) => {
-        console.log(result);
+        console.log(result.user);
         updateUserProfile({ displayName: name, photoURL: photoURL })
           .then(() => {
             Swal.fire({
-              title: "Drag me!",
+              title: "Account Created!",
+              text: "Welcome to Freelance Task Marketplace",
               icon: "success",
-              draggable: true,
+              confirmButtonText: "Go to Home",
             });
+            setError("");
             navigate("/");
           })
           .catch((error) => {
@@ -83,34 +83,39 @@ const Signup = () => {
   };
 
   return (
-     <div className="min-h-screen pt-16">
+    <div className="min-h-screen pt-16">
       <div>
         <div
           className="lg:p-20 p-8 bg-cover bg-center"
           style={{ backgroundImage: `url(${lBg})` }}
         >
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Sign Up</h2>
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+            Sign Up
+          </h2>
         </div>
-        
+
         <div className="flex flex-col-reverse lg:flex-row-reverse justify-between items-center mx-5 lg:mx-20 my-10 lg:my-20">
           <div className="w-full lg:w-1/2 flex justify-center">
-            <img 
-              className="max-w-2xl w-full h-auto" 
-              src={rImg} 
-              alt="Sign up illustration" 
+            <img
+              className="max-w-2xl w-full h-auto"
+              src={rImg}
+              alt="Sign up illustration"
             />
           </div>
-          
+
           <div className="w-full lg:w-1/2 space-y-8 p-8 lg:mx-20">
             <h2 className="mb-10 lg:mb-20 text-3xl lg:text-5xl font-roboto">
               Create your account
             </h2>
-            
+
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div className="flex flex-col lg:flex-row gap-4 lg:gap-7">
                   <div className="flex-1">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Full Name
                     </label>
                     <input
@@ -124,7 +129,10 @@ const Signup = () => {
                   </div>
 
                   <div className="flex-1">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Email address
                     </label>
                     <input
@@ -140,7 +148,10 @@ const Signup = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="photoURL" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="photoURL"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Profile Photo URL
                   </label>
                   <input
@@ -153,7 +164,10 @@ const Signup = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Password
                   </label>
                   <div className="mt-1 relative">

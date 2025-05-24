@@ -4,7 +4,6 @@ import {
   FaRegStar,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-console.log(motion)
 
 const FreelancerReviewSystem = () => {
   const [reviews, setReviews] = useState([

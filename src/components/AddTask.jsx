@@ -16,8 +16,6 @@ const AddTask = () => {
     newTask.userEmail = user?.email;
     newTask.userName = user?.displayName;
 
-    console.log(newTask);
-
     fetch("https://freelance-task-marketplace-server-v2ix.vercel.app/tasks", {
       method: "POST",
       headers: {

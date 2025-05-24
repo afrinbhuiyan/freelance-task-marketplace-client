@@ -7,8 +7,6 @@ const ViewBids = () => {
   const [bids, setBids] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log(task._id);
-
   useEffect(() => {
     fetch(
       `https://freelance-task-marketplace-server-v2ix.vercel.app/bids?taskId=${task._id}`

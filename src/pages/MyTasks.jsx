@@ -109,7 +109,7 @@ const MyTasks = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-amber-50 py-4 md:py-6 px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 lg:pt-24">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section - Optimized for iPad mini */}
+
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4 mb-4 md:mb-6 lg:mb-8">
           <Link
             to="/"
@@ -131,7 +131,6 @@ const MyTasks = () => {
           </Link>
         </div>
 
-        {/* Tasks List */}
         {tasks.length === 0 ? (
           <div className="bg-white rounded-lg md:rounded-xl lg:rounded-2xl shadow p-4 md:p-6 lg:p-8 xl:p-12 text-center">
             <div className="max-w-md mx-auto">
@@ -167,7 +166,7 @@ const MyTasks = () => {
           </div>
         ) : (
           <div className="bg-white rounded-lg md:rounded-xl lg:rounded-2xl shadow-md md:shadow-lg overflow-hidden border border-amber-200">
-            {/* Mobile View (Cards) - shows on screens < 768px */}
+
             <div className="md:hidden space-y-3 p-3">
               {tasks.map((task) => (
                 <div
@@ -238,7 +237,6 @@ const MyTasks = () => {
               ))}
             </div>
 
-            {/* iPad Mini Optimized View (768px-1024px) */}
             <div className="hidden md:block lg:hidden overflow-x-auto">
               <table className="min-w-full divide-y divide-amber-200">
                 <thead className="bg-amber-50">
