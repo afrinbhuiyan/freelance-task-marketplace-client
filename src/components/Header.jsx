@@ -243,7 +243,7 @@ const Header = () => {
             </NavLink>
           ))}
           {!user && (
-            <div className="pt-2 space-y-2 border-t border-white/10 mt-2">
+            <div className="pt-2 space-y-2 border-t border-white/10 mt-2.5">
               <NavLink
                 to="/login"
                 className="block w-full text-center px-4 py-2 rounded-lg text-white hover:bg-white/5 transition-colors"
@@ -256,7 +256,7 @@ const Header = () => {
                 className="block w-full text-center px-4 py-2 rounded-lg bg-white text-gray-900 hover:bg-gray-100 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Sign Up
+                Sign Up 
               </NavLink>
             </div>
           )}
