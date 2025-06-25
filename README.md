@@ -1,84 +1,90 @@
 # 🧑‍💻 Freelance Task Marketplace
 
-A full-stack freelance task marketplace where users can post tasks and freelancers can browse, bid, and collaborate. Built using modern web technologies including React, Firebase, Tailwind CSS, and Node.js.
+A full-stack freelance task marketplace where users can post tasks and freelancers can browse, bid, and collaborate seamlessly. Built with modern technologies focusing on performance, usability, and a smooth user experience.
 
-## 🌐 Live Site
+## 🖼️ Project Preview
 
-🔗 [Live Client Site](https://fantastic-lamington-a703b7.netlify.app/)  
-🌐 [Server Repository](https://github.com/afrinbhuiyan/freelance-task-marketplace-server)  
-🌐 [Client Repository](https://github.com/Programming-Hero-Web-Course4/b11a10-client-side-afrinbhuiyan)
+![Freelance Task Marketplace Screenshot](https://raw.githubusercontent.com/afrinbhuiyan/freelance-task-marketplace-client/main/public/screenshot.png)
 
----
+## 🌐 Live Links
 
-## 🚀 Features
+- Live Client: https://fantastic-lamington-a703b7.netlify.app/
+- Live Server: https://freelance-task-marketplace-server.vercel.app/
+- Server Repo: https://github.com/afrinbhuiyan/freelance-task-marketplace-server
 
-### 🔐 Authentication
-- Firebase email/password login
-- Google OAuth login
-- Protected/private routes
+## 🛠 Main Technologies Used
 
-### 📌 Task Management
-- Users can post tasks (CRUD)
-- Browse all tasks
-- Only the task owner can update or delete their tasks
+- React (Frontend)
+- Firebase (Authentication)
+- Tailwind CSS + DaisyUI (Styling/UI)
+- Node.js + Express (Backend)
+- MongoDB (Database)
+- Framer Motion, Lottie (Animations)
+- React Router (Routing)
 
-### 💬 Bidding System
+## 🚀 Key Features
+
+- Firebase Authentication (Email/Password & Google OAuth)
+- Task CRUD operations (only task owner can modify/delete)
 - Freelancers can bid on tasks
-- Task owners can view and manage bids
+- Task owners can manage bids
+- Dark/Light theme toggle with persistence
+- Fully responsive design (mobile/desktop)
+- Smooth navigation with custom 404 page
 
-### 🌗 Dark/Light Mode
-- Toggleable dark and light themes with persistence
+## 📦 Dependencies Overview
 
-### 🎨 UI/UX
-- Responsive design with Tailwind CSS and DaisyUI
-- Smooth animations with Framer Motion, Lottie, and React Awesome Reveal
+react, react-dom, firebase, tailwindcss, daisyui, express, mongodb, framer-motion, lottie-react, react-router-dom, sweetalert2, cors, dotenv
 
-### 🔄 Routing
-- Seamless navigation with React Router v7
-- Custom 404 Not Found page
-- Route-level error handling
+## 💻 How to Run Locally
 
----
+### Backend (Server)
+1. Clone the repo:
+   `git clone https://github.com/afrinbhuiyan/freelance-task-marketplace-server.git`
 
-├── public/
-├── src/
-│ ├── assets/
-│ ├── components/
-│ ├── firebase/ 
-│ ├── layout/
-│ ├── pages/
-│ ├── provider/ 
-│ ├── routes/
-│ ├── index.css
-│ ├── main.jsx
+2. Navigate into the folder:
+   `cd freelance-task-marketplace-server`
 
-## 🛠 Tech Stack
+3. Install dependencies:
+   `npm install`
 
-### Frontend
-- **React** v19.1.0
-- **React Router** v7.6.0
-- **Firebase** (Authentication)
-- **Tailwind CSS** v4.1.7 + **DaisyUI**
-- **Framer Motion**, **Swiper.js**
-- **Lottie React**, **React Awesome Reveal**, **React Simple Typewriter**
-- **SweetAlert2**, **React Icons**
+4. Create a .env file with:
+DB_USER=yourMongoDBUsername
+DB_PASS=yourMongoDBPassword
 
-### Backend
-- **Node.js**, **Express.js**
-- **MongoDB**
-- **CORS**, **dotenv**
+markdown
+Copy
+Edit
 
----
+5. Start the server:
+`nodemon index.js`
 
-## 📌 Deployment
+Server will run at http://localhost:3000
 
-- **Client**: Deployed on [Netlify]
-- **Server**: Deployed on [Vercel]
+### Frontend (Client)
+1. Clone the repo:
+`git clone https://github.com/afrinbhuiyan/freelance-task-marketplace-client.git`
 
----
+2. Navigate into the folder:
+`cd freelance-task-marketplace-client`
 
-## 🧾 License
+3. Install dependencies:
+`npm install`
 
-MIT License
+4. Start the client:
+`npm run dev`
 
-> This project was developed as part of Assignment-10 (category_Grapes) for the Web Development Course 🚀
+Client will run at http://localhost:5173
+
+## 📄 License
+
+This project is under the MIT License. Feel free to use, modify, and contribute.
+
+## 🧠 Author
+
+Mst Afrin  
+📍 Dhaka, Bangladesh  
+Email: mstafrinbhuiyan@gmail.com  
+GitHub: https://github.com/afrinbhuiyan
+
+Built with ❤️ using React, Firebase, Node.js, and Tailwind CSS.
