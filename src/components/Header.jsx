@@ -154,7 +154,7 @@ const Header = () => {
                     : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
                 }`}
               >
-                <div className="p-3 sm:p-4 bg-gradient-to-r from-[#f0da62] to-[#d3b638]">
+                <div className="p-3 sm:p-4 bg-gradient-to-r from-[#f0da62] to-[#d3b636]">
                   <div className="flex items-center gap-2 sm:gap-3">
                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-white">
                       <img
