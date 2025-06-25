@@ -9,7 +9,7 @@ A full-stack freelance task marketplace where users can post tasks and freelance
 ## 🌐 Live Links
 
 - Live Client: https://fantastic-lamington-a703b7.netlify.app/
-- Live Server: https://freelance-task-marketplace-server.vercel.app/
+- Live Server: https://freelance-task-marketplace-server-mauve.vercel.app/
 - Server Repo: https://github.com/afrinbhuiyan/freelance-task-marketplace-server
 
 ## 🛠 Main Technologies Used
@@ -49,8 +49,6 @@ react, react-dom, firebase, tailwindcss, daisyui, express, mongodb, framer-motio
    `npm install`
 
 4. Create a .env file with:
-DB_USER=yourMongoDBUsername
-DB_PASS=yourMongoDBPassword
 
 markdown
 Copy
