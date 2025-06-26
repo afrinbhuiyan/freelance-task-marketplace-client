@@ -89,9 +89,7 @@ const categories = [
 
 const BrowseCategory = () => {
   return (
-    <div className="py-16 lg:py-28 px-4">
-      <div className="max-w-7xl mx-auto">
-
+    <div className="py-16 lg:px-0 px-4">
         <Reveal keyframes={customAnimation} triggerOnce duration={800}>
           <div className="text-start">
             <h2 className="text-2xl md:text-3xl lg:text-4xl mb-2 md:mb-3 roboto">
@@ -100,20 +98,18 @@ const BrowseCategory = () => {
             <p className="text-gray-600 roboto text-sm md:text-base">
               Get inspiration from 800+ skills
             </p>
-            <div className="w-24 h-1 bg-yellow-400 mt-2 md:mt-4 rounded-full" />
+            <div className="w-24 h-1 bg-teal-700 mt-2 md:mt-4 rounded-full" />
           </div>
         </Reveal>
 
         <Zoom triggerOnce delay={800} duration={600}>
           <div className="flex justify-end">
-            <button className="flex items-center gap-2 text-gray-700 hover:text-yellow-600 font-medium py-2 px-4 transition-all duration-300 hover:-translate-y-1 group">
-            <span className="group-hover:-translate-x-1 transition-transform">
-              <FaArrowLeft />
-            </span>
-            <span className="text-sm md:text-base">
-                View All Categories
-            </span>
-          </button>
+            <button className="flex items-center gap-2 text-gray-700 hover:text-teal-700 font-medium py-2 px-4 transition-all duration-300 hover:-translate-y-1 group">
+              <span className="group-hover:-translate-x-1 transition-transform">
+                <FaArrowLeft />
+              </span>
+              <span className="text-sm md:text-base">View All Categories</span>
+            </button>
           </div>
         </Zoom>
 
@@ -128,9 +124,9 @@ const BrowseCategory = () => {
               cascade
             >
               <div
-                className={`relative group bg-white overflow-hidden rounded-xl p-6 h-full hover:border-l-4 border-yellow-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-2`}
+                className={`relative group bg-white overflow-hidden rounded-xl p-6 h-full hover:border-l-4 border-teal-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-2`}
               >
-                <div className="py-4 text-yellow-500">{category.icon}</div>
+                <div className="py-4 text-teal-700">{category.icon}</div>
                 <h3 className="text-xl font-bold text-gray-800 relative z-10">
                   {category.title}
                 </h3>
@@ -150,7 +146,6 @@ const BrowseCategory = () => {
             </Fade>
           ))}
         </div>
-      </div>
     </div>
   );
 };

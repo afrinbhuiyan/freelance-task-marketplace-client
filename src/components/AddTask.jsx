@@ -15,8 +15,9 @@ const AddTask = () => {
 
     newTask.userEmail = user?.email;
     newTask.userName = user?.displayName;
-
-    fetch("https://freelance-task-marketplace-server-v2ix.vercel.app/tasks", {
+    newTask.userAvatar = user?.photoURL;
+    
+    fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks", {
       method: "POST",
       headers: {
         "content-type": "application/json",

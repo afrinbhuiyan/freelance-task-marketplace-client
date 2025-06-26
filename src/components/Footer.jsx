@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -33,7 +33,6 @@ const Footer = () => {
       setIsSuccess(true);
       setEmail("");
 
-      // Reset success message after 3 seconds
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (err) {
       console.log(err);
@@ -46,11 +45,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white pt-16 pb-8 px-4 sm:px-6 lg:px-8 border-t-4 border-yellow-400">
-      <div className="max-w-7xl mx-auto">
+    <footer className="bg-gray-900 text-white pt-16 pb-8 px-4 sm:px-6 lg:px-8 border-t-4 border-teal-700">
+      <div className="max-w-[1500px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div className="space-y-6">
-            <Link to="/" className="text-3xl font-bold text-yellow-400 hover:text-yellow-500 transition-colors">
+            <Link to="/" className="text-3xl font-bold text-teal-700 hover:text-teal-600 transition-colors">
               Task<span className="text-white">Hub</span>
             </Link>
             <p className="text-gray-300">
@@ -59,42 +58,26 @@ const Footer = () => {
             </p>
             <div className="flex space-x-5">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/mst.afrin.528517"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
+                className="text-gray-400 hover:text-teal-600 transition-colors duration-300 transform hover:scale-110"
               >
                 <FaFacebook className="w-6 h-6" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://www.instagram.com/afrin_6068/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
-              >
-                <FaTwitter className="w-6 h-6" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
+                className="text-gray-400 hover:text-teal-600 transition-colors duration-300 transform hover:scale-110"
               >
                 <FaInstagram className="w-6 h-6" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://github.com/afrinbhuiyan"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
-              >
-                <FaLinkedin className="w-6 h-6" />
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 transform hover:scale-110"
+                className="text-gray-400 hover:text-teal-600 transition-colors duration-300 transform hover:scale-110"
               >
                 <FaGithub className="w-6 h-6" />
               </a>
@@ -102,7 +85,7 @@ const Footer = () => {
           </div>
 
           <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-yellow-400 border-b border-yellow-400 pb-2 inline-block">
+            <h4 className="text-xl font-semibold text-teal-700 border-b border-teal-700 pb-2 inline-block">
               Quick Links
             </h4>
             <ul className="space-y-3">
@@ -116,9 +99,9 @@ const Footer = () => {
                 <li key={item.name}>
                   <Link
                     to={item.path}
-                    className="text-gray-300 hover:text-yellow-400 transition-colors flex items-center group"
+                    className="text-gray-300 hover:text-teal-600 transition-colors flex items-center group"
                   >
-                    <span className="w-2 h-2 bg-yellow-400 mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    <span className="w-2 h-2 bg-teal-700 mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                     {item.name}
                   </Link>
                 </li>
@@ -127,25 +110,25 @@ const Footer = () => {
           </div>
 
           <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-yellow-400 border-b border-yellow-400 pb-2 inline-block">
+            <h4 className="text-xl font-semibold text-teal-700 border-b border-teal-700 pb-2 inline-block">
               Contact Us
             </h4>
             <div className="space-y-4">
               <div className="flex items-start space-x-4">
-                <MdEmail className="text-yellow-400 mt-1 flex-shrink-0 text-xl" />
-                <a href="mailto:support@taskhub.com" className="text-gray-300 hover:text-yellow-400 transition-colors">
+                <MdEmail className="text-teal-700 mt-1 flex-shrink-0 text-xl" />
+                <a href="mailto:support@taskhub.com" className="text-gray-300 hover:text-teal-600 transition-colors">
                   support@taskhub.com
                 </a>
               </div>
               <div className="flex items-start space-x-4">
-                <MdPhone className="text-yellow-400 mt-1 flex-shrink-0 text-xl" />
-                <a href="tel:+15551234567" className="text-gray-300 hover:text-yellow-400 transition-colors">
+                <MdPhone className="text-teal-700 mt-1 flex-shrink-0 text-xl" />
+                <a href="tel:+15551234567" className="text-gray-300 hover:text-teal-600 transition-colors">
                   +1 (555) 123-4567
                 </a>
               </div>
               <div className="flex items-start space-x-4">
-                <MdLocationOn className="text-yellow-400 mt-1 flex-shrink-0 text-xl" />
-                <address className="text-gray-300 hover:text-yellow-400 transition-colors not-italic">
+                <MdLocationOn className="text-teal-700 mt-1 flex-shrink-0 text-xl" />
+                <address className="text-gray-300 hover:text-teal-600 transition-colors not-italic">
                   123 Task Street<br />
                   San Francisco, CA 94107
                 </address>
@@ -154,7 +137,7 @@ const Footer = () => {
           </div>
 
           <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-yellow-400 border-b border-yellow-400 pb-2 inline-block">
+            <h4 className="text-xl font-semibold text-teal-700 border-b border-teal-700 pb-2 inline-block">
               Stay Updated
             </h4>
             <p className="text-gray-300">
@@ -171,7 +154,7 @@ const Footer = () => {
                     error ? "border-red-500" : "border-gray-700"
                   } 
                   bg-gray-800 text-white placeholder-gray-400 
-                  focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30
+                  focus:outline-none focus:border-teal-700 focus:ring-2 focus:ring-teal-700/30
                   transition-all duration-200 shadow-lg
                   hover:border-gray-600`}
                   required
@@ -205,13 +188,13 @@ const Footer = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-md transition-colors duration-300 flex items-center justify-center
+                className={`bg-teal-700 hover:bg-teal-800 text-white font-bold py-3 px-6 rounded-md transition-colors duration-300 flex items-center justify-center
                   ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""}`}
               >
                 {isSubmitting ? (
                   <>
                     <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-900"
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -254,7 +237,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
             &copy; {currentYear}{" "}
-            <span className="text-yellow-400">TaskHub</span>. All rights
+            <span className="text-teal-700">TaskHub</span>. All rights
             reserved.
           </p>
           <div className="flex space-x-6">
@@ -266,7 +249,7 @@ const Footer = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="text-gray-400 hover:text-yellow-400 text-sm transition-colors"
+                className="text-gray-400 hover:text-teal-600 text-sm transition-colors"
               >
                 {item.name}
               </Link>

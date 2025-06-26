@@ -73,9 +73,9 @@ const Header = ({ allTasks }) => {
       className={`fixed w-full z-50 px-4 py-3 sm:py-4 transition-colors duration-300 ${
         isHomePage
           ? isScrolled
-            ? "bg-black shadow-md"
+            ? "bg-gray-900 shadow-md"
             : "bg-transparent"
-          : "bg-black"
+          : "bg-gray-900"
       } ${isHomePage && !isScrolled ? "border-b border-[#ffffff2c]" : ""}`}
     >
       <div className="flex justify-between items-center max-w-[1500px] mx-auto">

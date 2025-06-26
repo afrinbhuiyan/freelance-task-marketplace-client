@@ -68,16 +68,16 @@ const FreelancerReviewSystem = () => {
   const renderStars = (rating) => {
     return [...Array(5)].map((_, i) =>
       i < rating ? (
-        <FaStar key={i} className="text-yellow-400 text-lg" />
+        <FaStar key={i} className="text-teal-700 text-lg" />
       ) : (
-        <FaRegStar key={i} className="text-yellow-400 text-lg" />
+        <FaRegStar key={i} className="text-teal-700 text-lg" />
       )
     );
   };
 
   return (
     <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="lg:px-0 px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           <div className="w-full lg:w-1/2">
             <div className="text-center lg:text-left">
@@ -87,7 +87,7 @@ const FreelancerReviewSystem = () => {
                 </div>
                 <div className="text-gray-600 text-center sm:text-left">
                   <div>Clients rate professionals</div>
-                  <div className="text-yellow-500 font-medium text-lg">★★★★★</div>
+                  <div className="text-teal-700 font-medium text-lg">★★★★★</div>
                 </div>
               </div>
 
@@ -141,7 +141,7 @@ const FreelancerReviewSystem = () => {
                 onClick={() => setActiveTab("read")}
                 className={`py-2 px-4 font-medium text-sm sm:text-base ${
                   activeTab === "read"
-                    ? "text-yellow-600 border-b-2 border-yellow-600"
+                    ? "text-teal-700 border-b-2 border-teal-700"
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -151,7 +151,7 @@ const FreelancerReviewSystem = () => {
                 onClick={() => setActiveTab("write")}
                 className={`py-2 px-4 font-medium text-sm sm:text-base ${
                   activeTab === "write"
-                    ? "text-yellow-600 border-b-2 border-yellow-600"
+                    ? "text-teal-700 border-b-2 border-teal-700"
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -239,7 +239,7 @@ const FreelancerReviewSystem = () => {
                           onChange={(e) =>
                             setNewReview({ ...newReview, name: e.target.value })
                           }
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-700 focus:border-teal-700"
                           placeholder="John Doe"
                         />
                       </div>
@@ -257,9 +257,9 @@ const FreelancerReviewSystem = () => {
                               className="focus:outline-none"
                             >
                               {star <= newReview.rating ? (
-                                <FaStar className="text-yellow-400 text-2xl" />
+                                <FaStar className="text-teal-700 text-2xl" />
                               ) : (
-                                <FaRegStar className="text-yellow-400 text-2xl hover:text-yellow-500" />
+                                <FaRegStar className="text-teal-700 text-2xl hover:text-teal-800" />
                               )}
                             </button>
                           ))}
@@ -283,7 +283,7 @@ const FreelancerReviewSystem = () => {
                               comment: e.target.value,
                             })
                           }
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-700 focus:border-teal-700"
                           placeholder="Share details about your experience..."
                           required
                         ></textarea>
@@ -304,7 +304,7 @@ const FreelancerReviewSystem = () => {
                             newReview.rating === 0 ||
                             !newReview.comment
                           }
-                          className="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? "Submitting..." : "Submit Review"}
                         </button>

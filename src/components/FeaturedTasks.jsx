@@ -1,20 +1,70 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import { motion } from "framer-motion";
+import {
+  FaCalendarAlt,
+  FaDollarSign,
+  FaStar,
+  FaArrowRight,
+  FaHeart,
+} from "react-icons/fa";
+import { FiClock } from "react-icons/fi";
+import { HiOutlineLightningBolt } from "react-icons/hi";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+// Custom arrow components with better styling
+const NextArrow = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    className="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-teal-600 p-3 text-white shadow-lg transition-all hover:bg-teal-700 hover:shadow-xl focus:outline-none"
+    aria-label="Next"
+  >
+    <FaArrowRight />
+  </button>
+);
+
+const PrevArrow = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    className="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-teal-600 p-3 text-white shadow-lg transition-all hover:bg-teal-700 hover:shadow-xl focus:outline-none"
+    aria-label="Previous"
+  >
+    <FaArrowRight className="rotate-180" />
+  </button>
+);
 
 const FeaturedTasks = () => {
   const [featuredTasks, setFeaturedTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [favorites, setFavorites] = useState(new Set());
+
+  // Toggle favorite status
+  const toggleFavorite = (taskId) => {
+    const newFavorites = new Set(favorites);
+    if (newFavorites.has(taskId)) {
+      newFavorites.delete(taskId);
+    } else {
+      newFavorites.add(taskId);
+    }
+    setFavorites(newFavorites);
+  };
 
   useEffect(() => {
-    fetch(
-      `${import.meta.env.VITE_API_URL}/tasks/featured`
-    )
+    fetch(`${import.meta.env.VITE_API_URL}/tasks/featured`)
       .then((res) => res.json())
       .then((data) => {
-        setFeaturedTasks(data);
+        const tasksWithImages = data.map((task) => ({
+          ...task,
+          // imageUrl: task.imageUrl || getRandomPlaceholderImage(),
+          // userAvatar: task.userAvatar || getRandomUserAvatar(),
+          // rating: (Math.random() * 2 + 3).toFixed(1), // Random rating between 3.0 and 5.0
+          // category: task.category || getRandomCategory(),
+        }));
+        setFeaturedTasks(tasksWithImages);
         setLoading(false);
-        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
@@ -23,19 +73,44 @@ const FeaturedTasks = () => {
       });
   }, []);
 
+  // Slider settings
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: Math.min(featuredTasks.length, 4),
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: Math.min(featuredTasks.length, 2),
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+      <div className="flex h-64 items-center justify-center">
+        <div className="h-12 w-12 animate-spin rounded-full border-t-2 border-b-2 border-teal-600"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="max-w-6xl mx-auto px-4 py-8 text-center">
-        <h2 className="text-2xl font-bold mb-6">Featured Tasks</h2>
-        <div className="bg-red-50 border-l-4 border-red-500 p-4">
+      <div className="px-4 py-8 text-center lg:px-0">
+        <h2 className="mb-6 text-2xl font-bold">Featured Tasks</h2>
+        <div className="border-l-4 border-red-500 bg-red-50 p-4">
           <div className="flex">
             <div className="flex-shrink-0">
               <svg
@@ -61,9 +136,9 @@ const FeaturedTasks = () => {
 
   if (featuredTasks.length === 0) {
     return (
-      <div className="max-w-6xl mx-auto px-4 py-8 text-center">
-        <h2 className="text-2xl font-bold mb-6">Featured Tasks</h2>
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+      <div className="px-4 py-8 text-center">
+        <h2 className="mb-6 text-2xl font-bold">Featured Tasks</h2>
+        <div className="border-l-4 border-yellow-400 bg-yellow-50 p-4">
           <div className="flex">
             <div className="flex-shrink-0">
               <svg
@@ -90,97 +165,135 @@ const FeaturedTasks = () => {
   }
 
   return (
-    <section className="px-4 pt-12 pb-20 border-gray-50 rounded-xl">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-start mb-16">
-          <h2 className="text-3xl mb-3 roboto">Featured Tasks</h2>
-          <p className="text-gray-600 max-w-2xl roboto">
-            Browse through our hand-picked selection of premium tasks
-          </p>
-        </div>
+    <section className="px-4 py-16 sm:px-6 lg:px-0">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-12 text-start"
+      >
+        <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+          Featured Tasks
+        </h2>
+        <p className="mt-3 text-lg text-gray-500">
+          Premium opportunities hand-picked for you
+        </p>
+      </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredTasks.map((task) => (
-            <div
-              key={task._id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 p-6 flex flex-col justify-between"
-            >
-              <div className="mb-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-semibold text-gray-800 hover:text-yellow-600 transition-colors duration-200">
+      <Slider {...settings} className="featured-tasks-slider pb-2">
+        {featuredTasks.map((task) => (
+          <motion.div
+            key={task._id}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="px-3"
+          >
+            <div className="relative h-full overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
+              {/* Task Image with Category Badge */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={task.imageUrl}
+                  alt={task.title}
+                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-4 left-4 rounded-lg bg-teal-600 px-3 py-1 text-sm font-semibold text-white">
+                  {task.category}
+                </div>
+                
+                {/* Favorite Button */}
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleFavorite(task._id);
+                  }}
+                  className={`absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full p-2 shadow-lg transition-all duration-300 ${
+                    favorites.has(task._id)
+                      ? "bg-red-500 text-white"
+                      : "bg-white text-gray-700 hover:bg-red-100 hover:text-red-500"
+                  }`}
+                  aria-label={favorites.has(task._id) ? "Unfavorite" : "Favorite"}
+                >
+                  <motion.div
+                    animate={{
+                      scale: favorites.has(task._id) ? [1, 1.2, 1] : 1,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <FaHeart
+                      className={`text-lg ${
+                        favorites.has(task._id) ? "fill-current" : ""
+                      }`}
+                    />
+                  </motion.div>
+                </button>
+              </div>
+
+              {/* Task Content */}
+              <div className="p-6">
+                {/* Title and Rating */}
+                <div className="mb-3 flex items-start justify-between">
+                  <h3 className="text-xl font-bold text-gray-900 line-clamp-1">
                     {task.title}
                   </h3>
-                  <span className="text-xs font-semibold bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                    Featured
-                  </span>
-                </div>
-                <p className="text-sm text-gray-500 mt-1 line-clamp-2">
-                  {task.description}
-                </p>
-              </div>
-
-              {task.skills && task.skills.length > 0 && (
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium text-gray-500 mb-1">
-                    Skills:
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {task.skills.slice(0, 4).map((skill) => (
-                      <span
-                        key={skill}
-                        className="flex items-center gap-1 bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full"
-                      >
-                        <svg
-                          className="w-3 h-3 text-yellow-500"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M10 2a1 1 0 01.894.553l1.618 3.276 3.622.527a1 1 0 01.554 1.706l-2.62 2.555.618 3.606a1 1 0 01-1.451 1.054L10 13.347l-3.217 1.69a1 1 0 01-1.451-1.054l.618-3.606-2.62-2.555a1 1 0 01.554-1.706l3.622-.527L9.106 2.553A1 1 0 0110 2z" />
-                        </svg>
-                        {skill}
-                      </span>
-                    ))}
+                  <div className="flex items-center rounded-full bg-yellow-100 px-2 py-1">
+                    <FaStar className="mr-1 text-yellow-500" />
+                    <span className="text-sm font-semibold text-yellow-800">
+                      {task.rating}
+                    </span>
                   </div>
                 </div>
-              )}
 
-              <div className="text-sm text-gray-500 space-y-1 mb-6">
-                <div className="flex justify-between">
-                  <span>Deadline:</span>
-                  <span className="font-semibold text-gray-700">
-                    {new Date(task.deadline).toLocaleDateString()}
-                  </span>
+                {/* Key Info Grid */}
+                <div className="mb-6 grid grid-cols-2 gap-3">
+                  <div className="flex items-center">
+                    <FaDollarSign className="mr-2 text-teal-600" />
+                    <div>
+                      <p className="text-xs text-gray-500">Budget</p>
+                      <p className="font-semibold text-gray-900">
+                        ${task.budget?.toLocaleString() || "Flexible"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <FaCalendarAlt className="mr-2 text-teal-600" />
+                    <div>
+                      <p className="text-xs text-gray-500">Deadline</p>
+                      <p className="font-semibold text-gray-900">
+                        {new Date(task.deadline).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span>Budget:</span>
-                  <span className="font-semibold text-gray-700">
-                    ${task.budget?.toLocaleString() || "Negotiable"}
-                  </span>
+                {/* User Info */}
+                <div className="mb-4 flex items-center">
+                  <img
+                    src={task.userAvatar}
+                    alt={task.userName}
+                    className="h-10 w-10 rounded-full object-cover"
+                  />
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-gray-900">
+                      {task.userName}
+                    </p>
+                    <p className="text-xs text-gray-500">Posted 2 days ago</p>
+                  </div>
                 </div>
-              </div>
-
-              <Link to={`/browse-tasks/${task._id}`}>
-                <button className="mt-auto w-full bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium py-2 rounded-lg flex items-center justify-center gap-2 transition duration-300">
+                {/* View Button */}
+                <Link
+                  to={`/browse-tasks/${task._id}`}
+                  className="flex items-center justify-center rounded-lg bg-teal-600 px-4 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-teal-700"
+                >
                   View Details
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </Link>
+                  <FaArrowRight className="ml-2" />
+                </Link>
+              </div>
             </div>
-          ))}
-        </div>
-      </div>
+          </motion.div>
+        ))}
+      </Slider>
     </section>
   );
 };
