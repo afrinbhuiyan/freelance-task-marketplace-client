@@ -23,7 +23,7 @@ const TaskDetails = () => {
 
   useEffect(() => {
     fetch(
-      `https://freelance-task-marketplace-server-v2ix.vercel.app/tasks/${id}`
+      `${import.meta.env.VITE_API_URL}/tasks/${id}`
     )
       .then((res) => res.json())
       .then((data) => setTask(data));
@@ -34,7 +34,7 @@ const TaskDetails = () => {
   const fetchBids = async () => {
     try {
       const res = await fetch(
-        `https://freelance-task-marketplace-server-v2ix.vercel.app/bids?taskId=${id}`
+        `${import.meta.env.VITE_API_URL}/bids?taskId=${id}`
       );
       const data = await res.json();
       setBidHistory(data);

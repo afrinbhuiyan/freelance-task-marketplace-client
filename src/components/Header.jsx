@@ -4,12 +4,15 @@ import Logo from "../../public/logo.png";
 import SearchModal from "./SearchModal";
 import { AuthContext } from "../provider/AuthContext";
 import ThemeToggle from "./ThemeToggle";
+import { FiSearch } from "react-icons/fi";
 
-const Header = () => {
+const Header = ({ allTasks }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef(null);
   const location = useLocation();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const { user, logout } = React.useContext(AuthContext);
 
@@ -22,6 +25,21 @@ const Header = () => {
   ];
 
   const isHomePage = location.pathname === "/";
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    if (isHomePage) {
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [isHomePage]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -52,11 +70,16 @@ const Header = () => {
 
   return (
     <header
-      className={`px-4 py-3 sm:py-4 ${
-        isHomePage ? "border-b border-[#ffffff2c]" : "bg-black"
-      }`}
+      className={`fixed w-full z-50 px-4 py-3 sm:py-4 transition-colors duration-300 ${
+        isHomePage
+          ? isScrolled
+            ? "bg-black shadow-md"
+            : "bg-transparent"
+          : "bg-black"
+      } ${isHomePage && !isScrolled ? "border-b border-[#ffffff2c]" : ""}`}
     >
       <div className="flex justify-between items-center max-w-[1500px] mx-auto">
+        {/* Rest of your header content remains the same */}
         <div className="flex items-center space-x-4">
           <button
             className="lg:hidden text-white focus:outline-none"
@@ -86,7 +109,10 @@ const Header = () => {
               )}
             </svg>
           </button>
-          <NavLink to="/" className="text-2xl font-bold flex items-center gap-2">
+          <NavLink
+            to="/"
+            className="text-2xl font-bold flex items-center gap-2"
+          >
             <img className="w-8 sm:w-9" src={Logo} alt="TaskHub Logo" />
             <span className="text-white font-serif">TaskHub</span>
           </NavLink>
@@ -122,14 +148,21 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center space-x-3 sm:space-x-4">
-          <SearchModal />
+          <button onClick={() => setIsSearchOpen(true)}>
+            <FiSearch className="text-2xl text-white" />
+          </button>
+          <SearchModal
+            isOpen={isSearchOpen}
+            onClose={() => setIsSearchOpen(false)}
+            allTasks={allTasks} 
+          />
           <div className="hidden sm:block">
             <ThemeToggle />
           </div>
-          
+
           {user ? (
-            <div 
-              className="relative" 
+            <div
+              className="relative"
               ref={dropdownRef}
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}
@@ -141,7 +174,10 @@ const Header = () => {
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white/20 hover:border-yellow-400 transition-all duration-200">
                   <img
                     className="w-full h-full object-cover"
-                    src={user.photoURL || "https://i.ibb.co/nqcD0KKD/free-user-icon-3296-thumb.png"}
+                    src={
+                      user.photoURL ||
+                      "https://i.ibb.co/nqcD0KKD/free-user-icon-3296-thumb.png"
+                    }
                     alt="User profile"
                   />
                 </div>
@@ -159,7 +195,10 @@ const Header = () => {
                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-white">
                       <img
                         className="w-full h-full object-cover"
-                        src={user.photoURL || "https://i.ibb.co/nqcD0KKD/free-user-icon-3296-thumb.png"}
+                        src={
+                          user.photoURL ||
+                          "https://i.ibb.co/nqcD0KKD/free-user-icon-3296-thumb.png"
+                        }
                         alt="User profile"
                       />
                     </div>
@@ -167,7 +206,9 @@ const Header = () => {
                       <h3 className="font-semibold text-white text-sm">
                         {user.displayName || "User"}
                       </h3>
-                      <p className="text-white/80 text-xs sm:text-sm truncate max-w-[180px]">{user.email}</p>
+                      <p className="text-white/80 text-xs sm:text-sm truncate max-w-[180px]">
+                        {user.email}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -178,8 +219,19 @@ const Header = () => {
                     className="block px-3 sm:px-4 py-2 sm:py-3 text-sm text-gray-700 hover:bg-indigo-50 transition-colors flex items-center gap-2"
                     onClick={() => setIsOpen(false)}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 text-yellow-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
                     </svg>
                     Profile Settings
                   </NavLink>
@@ -188,8 +240,19 @@ const Header = () => {
                     className="block px-3 sm:px-4 py-2 sm:py-3 text-sm text-gray-700 hover:bg-indigo-50 transition-colors flex items-center gap-2"
                     onClick={() => setIsOpen(false)}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 text-yellow-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                      />
                     </svg>
                     My Tasks
                   </NavLink>
@@ -200,8 +263,19 @@ const Header = () => {
                     }}
                     className="w-full text-left px-3 sm:px-4 py-2 sm:py-3 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 text-red-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      />
                     </svg>
                     Sign Out
                   </button>
@@ -228,7 +302,11 @@ const Header = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="lg:hidden mt-3 pb-3 space-y-2 bg-gray-900/95 rounded-lg p-3 backdrop-blur-sm">
+        <div
+          className={`lg:hidden mt-3 pb-3 space-y-2 rounded-lg p-3 backdrop-blur-sm ${
+            isHomePage && !isScrolled ? "bg-gray-900/95" : "bg-gray-900"
+          }`}
+        >
           {navLinks.map((link) => (
             <NavLink
               key={link.path}
@@ -256,7 +334,7 @@ const Header = () => {
                 className="block w-full text-center px-4 py-2 rounded-lg bg-white text-gray-900 hover:bg-gray-100 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Sign Up 
+                Sign Up
               </NavLink>
             </div>
           )}

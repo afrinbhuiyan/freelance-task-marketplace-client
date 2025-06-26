@@ -15,7 +15,7 @@ const MyTasks = () => {
   useEffect(() => {
     if (userEmail) {
       fetch(
-        `https://freelance-task-marketplace-server-v2ix.vercel.app/tasks?email=${userEmail}`
+        `${import.meta.env.VITE_API_URL}/tasks?email=${userEmail}`
       )
         .then((res) => res.json())
         .then((data) => {

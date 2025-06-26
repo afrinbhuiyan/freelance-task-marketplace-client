@@ -12,23 +12,21 @@ const Login = lazy(() => import("../pages/Login"));
 const Signup = lazy(() => import("../pages/Signup"));
 import ViewBids from "../pages/viewBids";
 import ErrorPage from "../pages/ErrorPage";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { fetchTasks } from "../utils/api";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: mainLayout,
+    loader: () => fetchTasks(),
+    hydrateFallbackElement: <LoadingSpinner />,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
         element: (
-          <Suspense
-            fallback={
-              <div className="flex justify-center items-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
-              </div>
-            }
-          >
+          <Suspense fallback={<LoadingSpinner />}>
             <Home />
           </Suspense>
         ),
@@ -36,13 +34,7 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: (
-          <Suspense
-            fallback={
-              <div className="flex justify-center items-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
-              </div>
-            }
-          >
+          <Suspense fallback={<LoadingSpinner />}>
             <Login />
           </Suspense>
         ),
@@ -50,13 +42,7 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: (
-          <Suspense
-            fallback={
-              <div className="flex justify-center items-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
-              </div>
-            }
-          >
+          <Suspense fallback={<LoadingSpinner />}>
             <Signup />
           </Suspense>
         ),
@@ -79,15 +65,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/browse-tasks/:id",
-        loader: () =>
-          fetch(
-            "https://freelance-task-marketplace-server-v2ix.vercel.app/tasks"
-          ),
-        hydrateFallbackElement: (
-          <div className="flex justify-center items-center min-h-screen">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
-          </div>
-        ),
+        loader: () => fetchTasks(),
+        hydrateFallbackElement: <LoadingSpinner />,
         element: (
           <PrivateRoute>
             <TaskDetails />
@@ -97,14 +76,8 @@ const router = createBrowserRouter([
       {
         path: "/update-task/:id",
         loader: ({ params }) =>
-          fetch(
-            `https://freelance-task-marketplace-server-v2ix.vercel.app/tasks/${params.id}`
-          ),
-        hydrateFallbackElement: (
-          <div className="flex justify-center items-center min-h-screen">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
-          </div>
-        ),
+          fetch(`${import.meta.env.VITE_API_URL}/tasks/${params.id}`),
+        hydrateFallbackElement: <LoadingSpinner />,
         element: (
           <PrivateRoute>
             <UpdateTask />
@@ -114,14 +87,8 @@ const router = createBrowserRouter([
       {
         path: "/view-bids/:id",
         loader: ({ params }) =>
-          fetch(
-            `https://freelance-task-marketplace-server-v2ix.vercel.app/tasks/${params.id}`
-          ),
-        hydrateFallbackElement: (
-          <div className="flex justify-center items-center min-h-screen">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
-          </div>
-        ),
+          fetch(`${import.meta.env.VITE_API_URL}/tasks/${params.id}`),
+        hydrateFallbackElement: <LoadingSpinner />,
         element: (
           <PrivateRoute>
             <ViewBids></ViewBids>
@@ -131,17 +98,8 @@ const router = createBrowserRouter([
       {
         path: "/browse-tasks",
         Component: BrowseTasks,
-        loader: async () => {
-          const res = await fetch(
-            "https://freelance-task-marketplace-server-v2ix.vercel.app/tasks"
-          );
-          return res.json();
-        },
-        hydrateFallbackElement: (
-          <div className="flex justify-center items-center min-h-screen">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
-          </div>
-        ),
+        loader: () => fetchTasks(),
+        hydrateFallbackElement: <LoadingSpinner />,
       },
     ],
   },

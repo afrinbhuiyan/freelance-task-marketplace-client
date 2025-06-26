@@ -8,7 +8,7 @@ const FeaturedTasks = () => {
 
   useEffect(() => {
     fetch(
-      "https://freelance-task-marketplace-server-v2ix.vercel.app/tasks/featured"
+      `${import.meta.env.VITE_API_URL}/tasks/featured`
     )
       .then((res) => res.json())
       .then((data) => {
