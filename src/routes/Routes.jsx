@@ -1,19 +1,24 @@
 import { createBrowserRouter } from "react-router";
 import mainLayout from "../layout/mainLayout";
-import PrivateRoute from "../provider/PrivateRoute";
 import AddTask from "../pages/AddTask";
-import MyTasks from "../pages/MyTasks";
 import TaskDetails from "../pages/TaskDetails";
-import UpdateTask from "../pages/UpdateTask";
 import BrowseTasks from "../pages/BrowseTasks";
 import { lazy, Suspense } from "react";
+import { fetchTasks } from "../utils/api";
+import LoadingSpinner from "../components/LoadingSpinner";
+import DashboardLayout from "../layout/DashboardLayout";
+import DashboardOverview from "../pages/DashboardOverview";
+import PrivateRoute from "../provider/PrivateRoute";
+import MyTasks from "../pages/MyTasks";
+import ViewBids from "../pages/viewBids";
+import ErrorPage from "../pages/ErrorPage";
+import AboutUs from "../pages/AboutUs";
+import ContactPage from "../pages/ContactPage";
+import SupportPage from "../pages/SupportPage";
+import DashboardAllTasks from "../components/DashboardAllTasks";
 const Home = lazy(() => import("../pages/Home"));
 const Login = lazy(() => import("../pages/Login"));
 const Signup = lazy(() => import("../pages/Signup"));
-import ViewBids from "../pages/viewBids";
-import ErrorPage from "../pages/ErrorPage";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { fetchTasks } from "../utils/api";
 
 const router = createBrowserRouter([
   {
@@ -48,22 +53,6 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/add-task",
-        element: (
-          <PrivateRoute>
-            <AddTask />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/my-tasks",
-        element: (
-          <PrivateRoute>
-            <MyTasks />
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "/browse-tasks/:id",
         loader: () => fetchTasks(),
         hydrateFallbackElement: <LoadingSpinner />,
@@ -74,18 +63,55 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/update-task/:id",
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/tasks/${params.id}`),
+        path: "/browse-tasks",
+        Component: BrowseTasks,
+        loader: () => fetchTasks(),
         hydrateFallbackElement: <LoadingSpinner />,
+      },
+      {
+        path: "/about-us",
+        Component: AboutUs,
+      },
+      {
+        path: "/contact",
+        Component: ContactPage,
+      },
+      {
+        path: "/support",
+        Component: SupportPage,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <DashboardOverview />,
+      },
+      {
+        path: "overview",
+        element: <DashboardOverview />,
+      },
+      {
+        path: "add-task",
+        element: <AddTask />,
+      },
+      {
+        path: "my-tasks",
         element: (
           <PrivateRoute>
-            <UpdateTask />
+            <MyTasks />
           </PrivateRoute>
         ),
       },
       {
-        path: "/view-bids/:id",
+        path: "/dashboard/view-bids/:id",
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/tasks/${params.id}`),
         hydrateFallbackElement: <LoadingSpinner />,
@@ -96,8 +122,14 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/browse-tasks",
+        path: "browse-tasks",
         Component: BrowseTasks,
+        loader: () => fetchTasks(),
+        hydrateFallbackElement: <LoadingSpinner />,
+      },
+      {
+        path: "dashboard/browse-tasks",
+        Component: DashboardAllTasks,
         loader: () => fetchTasks(),
         hydrateFallbackElement: <LoadingSpinner />,
       },

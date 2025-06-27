@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { AuthContext } from "../provider/AuthContext";
 import Swal from "sweetalert2";
-import Bg from "../assets/loginBackround.png";
 
 const AddTask = () => {
-  const { user } = useContext(AuthContext);
-
+  const { user } = React.useContext(AuthContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -13,10 +11,10 @@ const AddTask = () => {
     const formData = new FormData(form);
     const newTask = Object.fromEntries(formData.entries());
 
-    newTask.userEmail = user?.email;
-    newTask.userName = user?.displayName;
-    newTask.userAvatar = user?.photoURL;
-    
+    newTask.userEmail = user?.email || "no-email";
+    newTask.userName = user?.displayName || "Anonymous";
+    newTask.userAvatar = user?.photoURL || "/default-avatar.png";
+
     fetch("https://freelance-task-marketplace-server-mauve.vercel.app/tasks", {
       method: "POST",
       headers: {
@@ -53,7 +51,7 @@ const AddTask = () => {
         <div className="bg-white rounded-2xl shadow-xl p-10 md:p-12 border border-gray-200">
           <div className="mb-10 text-center">
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
-              Create a New Task
+              Create a New Task {user.email}
             </h2>
             <p className="mt-2 text-gray-500 text-sm">
               Fill out the form below to post your freelance task.

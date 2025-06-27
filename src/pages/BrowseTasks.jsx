@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronUp, FaTimes } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import BImg from "../assets/br.jpg";
+import TaskCard from "../components/taskCard";
 
 const BrowseTasks = () => {
   const loadedTasks = useLoaderData();
@@ -82,7 +83,7 @@ const BrowseTasks = () => {
             <li className="inline-flex items-center">
               <Link
                 to="/"
-                className="inline-flex items-center text-sm font-medium  text-white hover:text-yellow-400 transition-colors"
+                className="inline-flex items-center text-sm font-medium  text-white hover:text-teal-700 transition-colors"
               >
                 Home
               </Link>
@@ -101,7 +102,7 @@ const BrowseTasks = () => {
         <div className="mb-8">
           <div className="mt-6">
             <h1 className="text-4xl text-white mb-3 roboto">
-              Discover <span className="text-[#eed463]">Tasks</span> That Match
+              Discover <span className="text-teal-700">Tasks</span> That Match
               Your Skills
             </h1>
           </div>
@@ -109,15 +110,14 @@ const BrowseTasks = () => {
 
         <div className="bg-white p-3 max-w-5xl">
           <div className="flex flex-col md:flex-row gap-4">
-
             <div className="relative flex-grow group">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaSearch className="text-gray-400 group-focus-within:text-yellow-500 transition-colors" />
+                <FaSearch className="text-gray-400 group-focus-within:text-teal-700 transition-colors" />
               </div>
               <input
                 type="text"
                 placeholder="Search tasks by title, description or skills..."
-                className="pl-10 pr-4 py-3 w-full text-gray-900 placeholder-gray-500 placeholder:text-sm placeholder:font-serif focus:placeholder:text-yellow-400
+                className="pl-10 pr-4 py-3 w-full text-gray-900 placeholder-gray-500 placeholder:text-sm placeholder:font-serif focus:placeholder:text-teal-700
                   bg-transparent border-transparent focus:outline-none focus:ring-0 focus:border-none transition-all duration-300"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -134,20 +134,20 @@ const BrowseTasks = () => {
 
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white border border-yellow-500 hover:bg-white group ${
+              className={`relative overflow-hidden font-medium transition-all duration-300 border border-teal-700 ${
                 showFilters
-                  ? "bg-yellow-500 text-white hover:bg-yellow-600"
-                  : "bg-white text-yellow-500 hover:bg-indigo-50"
+                  ? "bg-teal-700 text-white hover:bg-teal-800"
+                  : "bg-white text-teal-700 hover:bg-teal-50 group"
               }`}
             >
               {showFilters ? (
-                <>
+                <span className="inline-flex items-center justify-center px-6 py-3">
                   Hide Filters <FaChevronUp className="ml-2 text-xs" />
-                </>
+                </span>
               ) : (
                 <>
-                  <span class="w-48 h-48 rotate-[-40deg] bg-yellow-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
-                  <span className="relative w-full text-left text-yellow-600 transition-colors duration-300 ease-in-out group-hover:text-white flex items-center">
+                  <span className="w-48 h-48 rotate-[-40deg] bg-teal-700 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                  <span className="relative w-full text-left px-6 py-3 transition-colors duration-300 ease-in-out group-hover:text-white flex items-center">
                     Show Filters <FaChevronDown className="ml-2 text-sm" />
                   </span>
                 </>
@@ -164,14 +164,14 @@ const BrowseTasks = () => {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 pt-6 border-t border-yellow-200 mt-4 mx-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 pt-6 border-t border-teal-200 mt-4 mx-1">
                   <div className="space-y-1">
                     <label className="block text-xs font-medium text-gray-700 p-1.5">
                       Category
                     </label>
                     <div className="relative">
                       <select
-                        className="appearance-none w-full border text-xs border-yellow-300 rounded-full px-4 py-2.5 pr-8 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+                        className="appearance-none w-full border text-xs border-teal-300 rounded-full px-4 py-2.5 pr-8 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:border-transparent transition-all"
                         value={filters.category}
                         onChange={(e) =>
                           setFilters({ ...filters, category: e.target.value })
@@ -184,7 +184,7 @@ const BrowseTasks = () => {
                           </option>
                         ))}
                       </select>
-                      <FaChevronDown className="absolute right-3 top-3.5 text-yellow-400 text-xs pointer-events-none" />
+                      <FaChevronDown className="absolute right-3 top-3.5 text-teal-700 text-xs pointer-events-none" />
                     </div>
                   </div>
 
@@ -198,7 +198,7 @@ const BrowseTasks = () => {
                         <input
                           type="number"
                           placeholder="Min"
-                          className="pl-8 pr-3 py-2.5 text-xs w-full border border-yellow-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+                          className="pl-8 pr-3 py-2.5 text-xs w-full border border-teal-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:border-transparent transition-all"
                           value={filters.minPrice}
                           onChange={(e) =>
                             setFilters({ ...filters, minPrice: e.target.value })
@@ -212,7 +212,7 @@ const BrowseTasks = () => {
                         <input
                           type="number"
                           placeholder="Max"
-                          className="pl-8 pr-3 py-2.5 text-xs w-full border border-yellow-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+                          className="pl-8 pr-3 py-2.5 text-xs w-full border border-teal-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:border-transparent transition-all"
                           value={filters.maxPrice}
                           onChange={(e) =>
                             setFilters({ ...filters, maxPrice: e.target.value })
@@ -232,7 +232,7 @@ const BrowseTasks = () => {
                       <input
                         type="text"
                         placeholder="Remote, City, Country"
-                        className="pl-10 pr-4 py-2.5 text-xs w-full border border-yellow-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+                        className="pl-10 pr-4 py-2.5 text-xs w-full border border-teal-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:border-transparent transition-all"
                         value={filters.location}
                         onChange={(e) =>
                           setFilters({ ...filters, location: e.target.value })
@@ -250,7 +250,7 @@ const BrowseTasks = () => {
                       <input
                         type="text"
                         placeholder="React, Design, etc."
-                        className="pl-10 pr-4 py-2.5 text-xs w-full border border-yellow-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+                        className="pl-10 pr-4 py-2.5 text-xs w-full border border-teal-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:border-transparent transition-all"
                         value={filters.skills}
                         onChange={(e) =>
                           setFilters({ ...filters, skills: e.target.value })
@@ -265,7 +265,7 @@ const BrowseTasks = () => {
                     </label>
                     <div className="relative">
                       <select
-                        className="appearance-none w-full border text-xs border-yellow-300 rounded-full px-4 py-2.5 pr-8 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+                        className="appearance-none w-full border text-xs border-teal-300 rounded-full px-4 py-2.5 pr-8 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:border-transparent transition-all"
                         value={filters.sortBy}
                         onChange={(e) =>
                           setFilters({ ...filters, sortBy: e.target.value })
@@ -276,12 +276,12 @@ const BrowseTasks = () => {
                         <option value="priceLow">Price: Low to High</option>
                         <option value="priceHigh">Price: High to Low</option>
                       </select>
-                      <FaChevronDown className="absolute right-3 top-3.5 text-yellow-400 text-xs pointer-events-none" />
+                      <FaChevronDown className="absolute right-3 top-3.5 text-teal-700 text-xs pointer-events-none" />
                     </div>
                   </div>
                 </div>
 
-                <div className="flex justify-end space-x-3 mt-6 pt-4 border-t border-yellow-300">
+                <div className="flex justify-end space-x-3 mt-6 pt-4 border-t border-teal-300">
                   <button
                     onClick={() =>
                       setFilters({
@@ -293,10 +293,10 @@ const BrowseTasks = () => {
                         sortBy: "newest",
                       })
                     }
-                    class="relative inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white border border-yellow-400 hover:bg-white group"
+                    class="relative inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white border border-teal-700 hover:bg-white group"
                   >
-                    <span class="w-48 h-48 rounded-xl rotate-[-40deg] bg-yellow-400 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
-                    <span class="relative w-full text-left text-yellow-500 transition-colors duration-300 ease-in-out group-hover:text-white">
+                    <span class="w-48 h-48 rounded-xl rotate-[-40deg] bg-teal-700 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                    <span class="relative w-full text-left text-teal-700 transition-colors duration-300 ease-in-out group-hover:text-white">
                       Reset Filters
                     </span>
                   </button>
@@ -308,106 +308,23 @@ const BrowseTasks = () => {
       </div>
       <div className="mx-8 md:mx-12 lg:mx-40">
         <div className="flex justify-end my-6">
-          <div className="text-sm text-gray-500 hover:text-amber-400">
+          <div className="text-sm text-gray-500 hover:text-teal-700">
             Showing {Math.min(filteredTasks.length, 12)} of{" "}
             {filteredTasks.length}
           </div>
         </div>
 
         {filteredTasks.length > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredTasks.map((task) => (
-              <div
-                key={task._id}
-                className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300"
-              >
-
-                <div className="p-5 pb-0">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-xl roboto font-medium text-gray-900 mb-1">
-                        {task.title}
-                      </h3>
-                    </div>
-                    <div className="text-right">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100">
-                        <FaStar className="text-yellow-400 mr-1" />
-                        {getRandomRating()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-5 pt-3">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-                    <div className="flex items-center">
-                      <FaDollarSign className="text-gray-300 mr-2" />
-                      <div>
-                        <p className="text-xs text-gray-500">Budget</p>
-                        <p className="font-semibold text-gray-900">
-                          ${task.budget}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <FaClock className="text-gray-300 mr-2" />
-                      <div>
-                        <p className="text-xs text-gray-500">Deadline</p>
-                        <p className="font-semibold text-gray-900">
-                          {task.deadline}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <FaMapMarkerAlt className="text-gray-300 mr-2" />
-                      <div>
-                        <p className="text-xs text-gray-500">Location</p>
-                        <p className="font-semibold text-gray-900">
-                          {task.location || "Remote"}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mb-3">
-                    <p className="text-gray-600 mt-2 line-clamp-2 mb-3">
-                      {task.description}
-                    </p>
-                    <div>
-                      <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 mb-2">
-                        {task.category || "General"}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-between items-center pt-3 border-t border-gray-100">
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        task.status === "Completed"
-                          ? "bg-green-100 text-green-800"
-                          : task.status === "Urgent"
-                          ? "bg-red-100 text-red-800"
-                          : "bg-gray-100"
-                      }`}
-                    >
-                      {task.status || "Open"}
-                    </span>
-                    <Link
-                      to={`/browse-tasks/${task._id}`}
-                      className="text-yellow-600 hover:text-yellow-800 font-medium text-sm flex items-center transition-colors"
-                    >
-                      View Details
-                      <IoIosArrowForward className="ml-1" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              <TaskCard task={task} />
             ))}
           </div>
         ) : (
           <div className="bg-white rounded-xl shadow-lg p-12 text-center">
             <div className="max-w-md mx-auto">
-              <div className="w-24 h-24 mx-auto mb-6 bg-yellow-50 rounded-full flex items-center justify-center">
-                <FaSearch className="text-yellow-400 text-3xl" />
+              <div className="w-24 h-24 mx-auto mb-6 bg-teal-50 rounded-full flex items-center justify-center">
+                <FaSearch className="text-teal-700 text-3xl" />
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-2">
                 No tasks found
@@ -427,7 +344,7 @@ const BrowseTasks = () => {
                     location: "",
                   });
                 }}
-                className="px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors shadow-sm"
+                className="px-6 py-3 bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition-colors shadow-sm"
               >
                 Reset All Filters
               </button>
@@ -441,7 +358,7 @@ const BrowseTasks = () => {
               <button className="px-3 py-1 rounded-md border border-gray-300 text-gray-500 hover:bg-gray-50">
                 Previous
               </button>
-              <button className="px-3 py-1 rounded-md bg-yellow-500 text-white">
+              <button className="px-3 py-1 rounded-md bg-teal-700 text-white">
                 1
               </button>
               <button className="px-3 py-1 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50">

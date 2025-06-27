@@ -30,7 +30,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div className="bg-gray-50 py-16 px-4">
+    <div className="bg-gray-50 py-20 px-4">
       <div className="max-w-[1500px] mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -46,14 +46,10 @@ const HowItWorks = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
           {steps.map((step, index) => (
             <div key={index} className="relative">
-              {/* Step Card */}
               <div className="p-6">
-                {/* Icon with green dot indicator */}
                 <div className="relative mb-4">
                   <div className="text-gray-700">{step.icon}</div>
                 </div>
-
-                {/* Content */}
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   {step.title}
                 </h3>

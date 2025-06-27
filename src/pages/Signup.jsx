@@ -3,9 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../provider/AuthContext";
 import Swal from "sweetalert2";
-
-import lBg from "../assets/loginBackround.png";
-import rImg from "../assets/register.png";
+import rImg from "../assets/login.png";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -85,15 +83,6 @@ const Signup = () => {
   return (
     <div className="min-h-screen pt-16">
       <div>
-        <div
-          className="lg:p-20 p-8 bg-cover bg-center"
-          style={{ backgroundImage: `url(${lBg})` }}
-        >
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Sign Up
-          </h2>
-        </div>
-
         <div className="flex flex-col-reverse lg:flex-row-reverse justify-between items-center mx-5 lg:mx-20 my-10 lg:my-20">
           <div className="w-full lg:w-1/2 flex justify-center">
             <img
@@ -123,7 +112,7 @@ const Signup = () => {
                       name="name"
                       type="text"
                       required
-                      className="mt-1 block w-full px-3 py-2 border focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-sm"
+                      className="mt-1 block w-full px-3 py-2 border focus:outline-none focus:ring-teal-500 focus:border-teal-500 placeholder:text-sm"
                       placeholder="Enter Your Name"
                     />
                   </div>
@@ -141,7 +130,7 @@ const Signup = () => {
                       type="email"
                       autoComplete="email"
                       required
-                      className="mt-1 block w-full px-3 py-2 border focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-sm"
+                      className="mt-1 block w-full px-3 py-2 border focus:outline-none focus:ring-teal-500 focus:border-teal-500 placeholder:text-sm"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -158,7 +147,7 @@ const Signup = () => {
                     id="photoURL"
                     name="photoURL"
                     type="url"
-                    className="mt-1 block w-full px-3 py-2 border focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-sm"
+                    className="mt-1 block w-full px-3 py-2 border focus:outline-none focus:ring-teal-500 focus:border-teal-500 placeholder:text-sm"
                     placeholder="https://example.com/photo.jpg"
                   />
                 </div>
@@ -176,7 +165,7 @@ const Signup = () => {
                       name="password"
                       type={showPassword ? "text" : "password"}
                       required
-                      className="block w-full px-3 py-2 border focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-sm pr-10"
+                      className="block w-full px-3 py-2 border focus:outline-none focus:ring-teal-500 focus:border-teal-500 placeholder:text-sm pr-10"
                       placeholder="••••••••"
                     />
                     <button
@@ -196,7 +185,7 @@ const Signup = () => {
               <div>
                 <button
                   type="submit"
-                  className="relative w-full inline-flex items-center justify-center px-10 py-2 overflow-hidden font-mono font-medium tracking-tighter text-white bg-yellow-400 group hover:bg-yellow-500"
+                  className="relative w-full inline-flex items-center justify-center px-10 py-2 overflow-hidden font-mono font-medium tracking-tighter text-white bg-teal-700 group hover:bg-teal-800"
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-black bg-opacity-10 group-hover:w-full group-hover:h-56"></span>
                   <span className="relative">Register</span>
@@ -230,7 +219,7 @@ const Signup = () => {
             <div className="text-center text-sm pt-4">
               <Link
                 to="/login"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
+                className="font-medium text-teal-700 hover:text-teal-800"
               >
                 Already have an account? Login
               </Link>

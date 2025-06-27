@@ -5,6 +5,7 @@ import SearchModal from "./SearchModal";
 import { AuthContext } from "../provider/AuthContext";
 import ThemeToggle from "./ThemeToggle";
 import { FiSearch } from "react-icons/fi";
+import { path } from "framer-motion/client";
 
 const Header = ({ allTasks }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,14 +17,24 @@ const Header = ({ allTasks }) => {
 
   const { user, logout } = React.useContext(AuthContext);
 
-  const navLinks = [
+  const publicNavLinks = [
     { name: "Home", path: "/" },
-    { name: "Add Task", path: "/add-task" },
     { name: "Browse Tasks", path: "/browse-tasks" },
-    { name: "My Posted Tasks", path: "/my-tasks" },
-    { name: "How It Works", path: "/how-to-works" },
+    { name: "About Us", path: "/about-us" },
+    { name: "Contact", path: "/contact" },
+    { name: "Support", path: "/support" },
   ];
 
+  const privateNavLinks = [
+    { name: "Home", path: "/" },
+    { name: "Browse Tasks", path: "/browse-tasks" },
+    { name: "About Us", path: "/about-us" },
+    { name: "Contact", path: "/contact" },
+    { name: "Support", path: "/support" },
+    { name: "Dashboard", path: "/dashboard" },
+  ];
+
+  const navLinks = user ? privateNavLinks : publicNavLinks;
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
@@ -154,150 +165,150 @@ const Header = ({ allTasks }) => {
           <SearchModal
             isOpen={isSearchOpen}
             onClose={() => setIsSearchOpen(false)}
-            allTasks={allTasks} 
+            allTasks={allTasks}
           />
           <div className="hidden sm:block">
             <ThemeToggle />
           </div>
 
           {user ? (
-            <div
-              className="relative"
-              ref={dropdownRef}
-              onMouseEnter={() => setIsOpen(true)}
-              onMouseLeave={() => setIsOpen(false)}
-            >
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 focus:outline-none"
-              >
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white/20 hover:border-yellow-400 transition-all duration-200">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={
-                      user.photoURL ||
-                      "https://i.ibb.co/nqcD0KKD/free-user-icon-3296-thumb.png"
-                    }
-                    alt="User profile"
-                  />
-                </div>
-              </button>
+  <div
+    className="relative"
+    ref={dropdownRef}
+    onMouseEnter={() => setIsOpen(true)}
+    onMouseLeave={() => setIsOpen(false)}
+  >
+    <button
+      onClick={() => setIsOpen(!isOpen)}
+      className="flex items-center gap-2 focus:outline-none"
+    >
+      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-white/20 hover:border-teal-400 transition-all duration-200">
+        <img
+          className="w-full h-full object-cover"
+          src={
+            user.photoURL ||
+            "https://i.ibb.co/nqcD0KKD/free-user-icon-3296-thumb.png"
+          }
+          alt="User profile"
+        />
+      </div>
+    </button>
 
-              <div
-                className={`absolute right-0 mt-2 w-56 sm:w-64 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-200 ease-out origin-top-right z-50 ${
-                  isOpen
-                    ? "opacity-100 scale-100 translate-y-0"
-                    : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                }`}
-              >
-                <div className="p-3 sm:p-4 bg-gradient-to-r from-[#f0da62] to-[#d3b636]">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-white">
-                      <img
-                        className="w-full h-full object-cover"
-                        src={
-                          user.photoURL ||
-                          "https://i.ibb.co/nqcD0KKD/free-user-icon-3296-thumb.png"
-                        }
-                        alt="User profile"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white text-sm">
-                        {user.displayName || "User"}
-                      </h3>
-                      <p className="text-white/80 text-xs sm:text-sm truncate max-w-[180px]">
-                        {user.email}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+    <div
+      className={`absolute right-0 mt-2 w-56 sm:w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden transition-all duration-200 ease-out origin-top-right z-50 ${
+        isOpen
+          ? "opacity-100 scale-100 translate-y-0"
+          : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+      }`}
+    >
+      <div className="p-3 sm:p-4 bg-gradient-to-r from-teal-500 to-teal-600">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-white">
+            <img
+              className="w-full h-full object-cover"
+              src={
+                user.photoURL ||
+                "https://i.ibb.co/nqcD0KKD/free-user-icon-3296-thumb.png"
+              }
+              alt="User profile"
+            />
+          </div>
+          <div>
+            <h3 className="font-semibold text-white text-sm">
+              {user.displayName || "User"}
+            </h3>
+            <p className="text-white/80 text-xs sm:text-sm truncate max-w-[180px]">
+              {user.email}
+            </p>
+          </div>
+        </div>
+      </div>
 
-                <div className="divide-y divide-gray-100">
-                  <NavLink
-                    to="/profile"
-                    className="block px-3 sm:px-4 py-2 sm:py-3 text-sm text-gray-700 hover:bg-indigo-50 transition-colors flex items-center gap-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 text-yellow-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                    Profile Settings
-                  </NavLink>
-                  <NavLink
-                    to="/my-tasks"
-                    className="block px-3 sm:px-4 py-2 sm:py-3 text-sm text-gray-700 hover:bg-indigo-50 transition-colors flex items-center gap-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 text-yellow-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                      />
-                    </svg>
-                    My Tasks
-                  </NavLink>
-                  <button
-                    onClick={() => {
-                      handleSignOut();
-                      setIsOpen(false);
-                    }}
-                    className="w-full text-left px-3 sm:px-4 py-2 sm:py-3 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 text-red-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                      />
-                    </svg>
-                    Sign Out
-                  </button>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="hidden md:flex items-center gap-2 sm:gap-3">
-              <NavLink
-                to="/login"
-                className="px-3 py-1.5 text-sm rounded-md text-white hover:bg-white/10 transition-colors"
-              >
-                Login
-              </NavLink>
-              <NavLink
-                to="/signup"
-                className="px-3 py-1.5 text-sm rounded-md bg-white text-indigo-600 hover:bg-gray-100 transition-colors"
-              >
-                Sign Up
-              </NavLink>
-            </div>
-          )}
+      <div className="divide-y divide-gray-100 dark:divide-gray-700">
+        <NavLink
+          to="/profile"
+          className="block px-3 sm:px-4 py-2 sm:py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-colors flex items-center gap-2"
+          onClick={() => setIsOpen(false)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 text-teal-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+          Profile Settings
+        </NavLink>
+        <NavLink
+          to="/my-tasks"
+          className="block px-3 sm:px-4 py-2 sm:py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-colors flex items-center gap-2"
+          onClick={() => setIsOpen(false)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 text-teal-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            />
+          </svg>
+          My Tasks
+        </NavLink>
+        <button
+          onClick={() => {
+            handleSignOut();
+            setIsOpen(false);
+          }}
+          className="w-full text-left px-3 sm:px-4 py-2 sm:py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 text-red-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+) : (
+  <div className="hidden md:flex items-center gap-2 sm:gap-3">
+    <NavLink
+      to="/login"
+      className="px-3 py-1.5 text-sm rounded-md text-white hover:bg-white/10 transition-colors"
+    >
+      Login
+    </NavLink>
+    <NavLink
+      to="/signup"
+      className="px-3 py-1.5 text-sm rounded-md bg-gradient-to-r from-teal-500 to-teal-600 text-white hover:from-teal-600 hover:to-teal-700 transition-colors"
+    >
+      Sign Up
+    </NavLink>
+  </div>
+)}
         </div>
       </div>
 

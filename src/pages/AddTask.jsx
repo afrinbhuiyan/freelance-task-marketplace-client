@@ -1,11 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthContext";
 import Swal from "sweetalert2";
-import Bg from "../assets/loginBackround.png";
 
 const AddTask = () => {
   const { user } = useContext(AuthContext);
   const [imageUrl, setImageUrl] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+
+  useEffect(() => {
+    console.log("AddTask mounted");
+    console.log("User:", user);
+    if (user?.photoURL) {
+      setUserAvatar(user.photoURL);
+    }
+  }, [user]);
 
   const handleImageUrlChange = (e) => {
     setImageUrl(e.target.value);
@@ -18,9 +26,9 @@ const AddTask = () => {
     const formData = new FormData(form);
     const newTask = Object.fromEntries(formData.entries());
 
-    // Add user information to the task
     newTask.userEmail = user?.email;
     newTask.userName = user?.displayName;
+    newTask.userAvatar = userAvatar;
     newTask.createdAt = new Date().toISOString();
 
     try {
@@ -60,20 +68,20 @@ const AddTask = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-25 to-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 mt-10">
-      <div className="max-w-[1500px] mx-auto">
+    <div className="bg-gradient-to-br from-teal-25 to-white pb-20 px-4 sm:px-6 lg:px-0">
+      <div className="">
         {/* Premium Card Container */}
-        <div className="bg-white rounded-2xl overflow-hidden border border-teal-100">
+        <div className="overflow-hidden">
           {/* Header with Teal Accent */}
-          <div className="bg-gradient-to-r from-teal-600 to-teal-500 px-10 py-8">
+          <div className=" px-10 py-8">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold text-white">Create New Task</h1>
-                <p className="mt-2 text-teal-100 font-light">
+                <h1 className="text-3xl font-bold text-teal-600">Create New Task</h1>
+                <p className="mt-2 text-teal-600 font-light">
                   Complete all required fields to post your opportunity
                 </p>
               </div>
-              <div className="bg-white/20 p-3 rounded-full">
+              <div className="bg-gradient-to-r from-teal-600 to-teal-500 p-3 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
