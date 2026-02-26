@@ -81,7 +81,7 @@ This project is under the MIT License. Feel free to use, modify, and contribute.
 ## 🧠 Author
 
 Mst Afrin  
-📍 Dhaka, Bangladesh  
+Dhaka, Bangladesh  
 Email: mstafrinbhuiyan@gmail.com  
 GitHub: https://github.com/afrinbhuiyan
 
