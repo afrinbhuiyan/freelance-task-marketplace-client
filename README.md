@@ -85,4 +85,4 @@ Dhaka, Bangladesh
 Email: mstafrinbhuiyan@gmail.com  
 GitHub: https://github.com/afrinbhuiyan
 
-Built with ❤️ using React, Firebase, Node.js, and Tailwind CSS.
+Built with using React, Firebase, Node.js, and Tailwind CSS.
