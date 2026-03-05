@@ -1,4 +1,4 @@
-# Freelance Task Marketplace
+# Freelance Task Marketplac
 
 A full-stack freelance task marketplace where users can post tasks and freelancers can browse, bid, and collaborate seamlessly. Built with modern technologies focusing on performance, usability, and a smooth user experience.
 
